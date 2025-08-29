@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Pacifico&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sriracha&display=swap');
+@import "tailwindcss";
+@theme {
+    /* primary */
+    --color-primary-alabaster: #fbfbfb; /* mau trang */
+    --color-primary-black-pearl: #061b37;  /* xanh dam   */
+    --color-primary-blue-ribbon: #0e65f3;  /* mau xanh button */
+    --color-primary-danube: #739cce;  /* mau xanh nhat */
+    --color-primary-blue-bayoux: #4e6081;  /* mau xanh xam text */
+    /* secondary */
+    --color-secondary-cloud-burst: #223659;  
+    --color-secondary-manatee: #8c8caf; 
+    --color-secondary-fiord: #445463;  
+    --color-secondary-oxford-blue: #2f3d4b;
+    --color-secondary-trout: #4c4c62; 
+}
+
+.title-about-us{
+    font-family: "Roboto", sans-serif;
+}
