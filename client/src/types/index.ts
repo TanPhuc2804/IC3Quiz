@@ -39,11 +39,13 @@ export interface Question {
 }
 
 export interface MatchQuestion {
+    id:number,
     term: string,
     definition: string,
 }
 
 export interface ClassificationQuestion {
+    id:number,
     content: string,
     classify: string,
 }
@@ -74,4 +76,17 @@ export interface Category {
     id: number,
     content: string,
     image_url: string
+}
+
+export type ResultQuestionType = {
+    id_classify?:number
+    isCorrect: boolean,
+    choice: any,
+    anwser_correct?: any
+}
+
+export type ResultsType={
+    question_id:number,
+    question_type:string,
+    user_answer?:string | string[] | ResultQuestionType|ResultQuestionType[] | Record<string | number, string>[]
 }

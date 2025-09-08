@@ -86,22 +86,27 @@ export const questions: Question[] = [
     "question_type": "classify",
     "classify_question": [
       {
+        "id": 4,
         "content": "Bàn di chuột cảm ứng (Touchpad)",
         "classify": "Thiết bị đầu vào (Input Device)"
       },
       {
+        "id": 5,
         "content": "Bàn phím (Keyboard)",
         "classify": "Thiết bị đầu vào (Input Device)"
       },
       {
+        "id": 6,
         "content": "Máy in (Printer)",
         "classify": "Thiết bị đầu ra (Output Device)"
       },
       {
+        "id": 7,
         "content": "Màn hình (Monitor)",
         "classify": "Thiết bị đầu ra (Output Device)"
       },
       {
+        "id": 8,
         "content": "Chuột (Mouse)",
         "classify": "Thiết bị đầu vào (Input Device)"
       }
@@ -114,24 +119,19 @@ export const questions: Question[] = [
     "question_type": "classify",
     "classify_question": [
       {
-        "content": "Bàn di chuột cảm ứng (Touchpad)",
-        "classify": "Thiết bị đầu vào (Input Device)"
+        "id": 1,
+        "content": "Có thể dùng cáp USB để cấp dữ liệu và nguồn điện cho một thiết bị.",
+        "classify": "Đúng"
       },
       {
-        "content": "Bàn phím (Keyboard)",
-        "classify": "Thiết bị đầu vào (Input Device)"
+        "id": 2,
+        "content": "Có thể dùng kết nối Bluetooth để cấp dữ liệu và nguồn điện cho một thiết bị.",
+        "classify": "Sai"
       },
       {
-        "content": "Máy in (Printer)",
-        "classify": "Thiết bị đầu ra (Output Device)"
-      },
-      {
-        "content": "Màn hình (Monitor)",
-        "classify": "Thiết bị đầu ra (Output Device)"
-      },
-      {
-        "content": "Chuột (Mouse)",
-        "classify": "Thiết bị đầu vào (Input Device)"
+        "id": 3,
+        "content": "Có thế dùng bộ chia USB Hub để cắm nhiều thiết bị vào cùng một cổng USB duy nhất.",
+        "classify": "Đúng"
       }
     ]
   },
@@ -735,16 +735,19 @@ export const questions: Question[] = [
     "question_type": "drop_match",
     "match_question": [
       {
+        "id":1,
         "term": "Loa thông minh",
-        "definition": "âm thanh và thường không quay được Video."
+        "definition": "Có thể ghi âm những người ở gần xung quanh và thường không quay được Video. "
       },
       {
+        "id":2,
         "term": "Chuông cửa thông minh",
-        "definition": "kí ở trước nhà."
+        "definition": "Có thể quay Video và thu âm những người ở trước nhà."
       },
       {
+        "id":3,
         "term": "Webcam",
-        "definition": "c bàn phím và thu âm vùng gần xung quanh."
+        "definition": "Có thể quay Video những người ngồi trước bàn phím và thu âm vùng gần xung quanh. "
       }
     ]
   },
@@ -755,14 +758,17 @@ export const questions: Question[] = [
     "question_type": "drop_match",
     "match_question": [
       {
+        "id":4,
         "term": "Email",
-        "definition": "i và không cần phản hồi ngay."
+        "definition": "Dùng cho những tin nhắn có nội dung dài và không cần phản hồi ngay."
       },
       {
+        "id":5,
         "term": "Hội thảo truyền hình",
-        "definition": "thì."
+        "definition": "Dùng để giao tiếp và tương tác qua lại tức thì. "
       },
       {
+        "id":6,
         "term": "Tin nhắn",
         "definition": "Dùng cho những tin nhắn ngắn, không trang trọng và cần phản hồi nhanh ngay cả khi người đó đang ở nhà."
       }

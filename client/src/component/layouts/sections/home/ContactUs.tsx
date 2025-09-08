@@ -1,6 +1,6 @@
 import { ConfigProvider, Input } from 'antd'
 import React from 'react'
-import ButtonDefauld from '../../button/ButtonDefauld'
+import ButtonDefauld from '../../../button/ButtonDefauld'
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faUser } from '@fortawesome/free-regular-svg-icons';

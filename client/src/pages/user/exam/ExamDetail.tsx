@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router'
-import type { Exam as ExamType } from '../../types'
-import ButtonDefauld from '../../component/button/ButtonDefauld'
-import ExamDetailCard from '../../component/card/ExamDetailCard'
+import { useLocation, useNavigate } from 'react-router'
+import type { Exam as ExamType } from '../../../types'
+import ButtonDefauld from '../../../component/button/ButtonDefauld'
+import ExamDetailCard from '../../../component/card/ExamDetailCard'
 import { motion } from "framer-motion"
 function ExamDetail() {
     const [exam, setExam] = useState<ExamType>()
+    const navigate = useNavigate()
     const location = useLocation()
     useEffect(() => {
         const { exam } = location.state
@@ -14,6 +15,11 @@ function ExamDetail() {
         }
         setExam(exam)
     }, [])
+
+    const handlePracticeExam = ()=>{
+        navigate(`practice`,{state:{exam}})
+    }
+
     return (
         <div className="mx-24 my-14">
             {/* Tiêu đề */}
@@ -55,6 +61,7 @@ function ExamDetail() {
                         text_color="white"
                         border_color="white"
                         haveMotion={true}
+                        onClick={handlePracticeExam}
                     />                     
                     <ButtonDefauld
                         height="50px"

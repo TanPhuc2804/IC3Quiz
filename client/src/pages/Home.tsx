@@ -1,9 +1,9 @@
 import { Button, Typography } from "antd"
 import ButtonDefauld from "../component/button/ButtonDefauld"
-import AboutUs from "../component/layouts/sections/AboutUs"
-import ContactUs from "../component/layouts/sections/ContactUs"
+import AboutUs from "../component/layouts/sections/home/AboutUs"
+import ContactUs from "../component/layouts/sections/home/ContactUs"
 import { motion } from "motion/react"
-import Exam from "../component/layouts/sections/Exam"
+import Exam from "../component/layouts/sections/home/Exam"
 import ButtonViewMore from "../component/button/ButtonViewMore"
 import { useNavigate } from "react-router"
 function Home() {

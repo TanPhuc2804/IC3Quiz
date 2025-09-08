@@ -2,7 +2,7 @@ import NavItem from './NavItem'
 import { motion } from "motion/react"
 function Header() {
   return (
-    <div className='bg-primary-black-pearl flex justify-between items-center py-4 px-24'>
+    <div className='bg-primary-black-pearl flex justify-between items-center py-2 px-24 '>
       <motion.img
         initial={{ x: -1000 }}
         animate={{ x: 0 }}
@@ -14,7 +14,7 @@ function Header() {
         initial={{ x: 1000 }}
         animate={{ x: 0 }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
-        className='flex gap-7.5 text-[20px]'
+        className='flex gap-7.5 text-[16px]'
       >
         <NavItem label="Trang chủ" link='/' />
         <NavItem label="Bài kiểm tra IC3" link='/' />

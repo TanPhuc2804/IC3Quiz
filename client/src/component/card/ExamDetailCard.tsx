@@ -12,7 +12,6 @@ function ExamDetailCard({ exam }: ExamDetailType) {
             <p className='mb-[10px]'><b>Description</b>: {exam?.description}</p>
             <p className='mb-[10px]'><b>Number of Questions</b>: {exam?.total_question}</p>
             <p className='mb-[10px]'><b>Duration</b>: {exam?.duration} mins</p>
-         
         </div>
     )
 }

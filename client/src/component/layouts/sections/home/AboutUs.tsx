@@ -1,6 +1,6 @@
 import React from 'react'
-import AvatarUser from '../../avatar/Avatar'
-import TimeLineStory from '../../timeline/TimeLine'
+import AvatarUser from '../../../avatar/Avatar'
+import TimeLineStory from '../../../timeline/TimeLine'
 import Statistics from './Statistics'
 import { motion } from "framer-motion"
 function AboutUs() {

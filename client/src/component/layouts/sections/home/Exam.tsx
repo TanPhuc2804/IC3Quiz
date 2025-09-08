@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import type { Exam as ExamType } from "../../../types/index"
-import { exams as examsData } from '../../../data'
-import ExamCard from '../../card/ExamCard'
-import ButtonViewMore from '../../button/ButtonViewMore'
+import type { Exam as ExamType } from "../../../../types/index"
+import { exams as examsData } from '../../../../data'
+import ExamCard from '../../../card/ExamCard'
+import ButtonViewMore from '../../../button/ButtonViewMore'
 import { motion } from "framer-motion"
 
 type ExamProp ={
@@ -16,7 +16,7 @@ function Exam({totalItem=0}:ExamProp) {
             setExams(examsData)
             return
         }
-        setExams(examsData.slice(0, 4))
+        setExams(examsData.slice(0, 3))
     }, [])
 
     return (
