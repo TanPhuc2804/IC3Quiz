@@ -1,13 +1,13 @@
 import React, { memo, useState } from 'react'
 import { DragDropContext, Droppable, Draggable, type DropResult, type DragStart, type ResponderProvided } from 'react-beautiful-dnd';
-import type { MatchQuestion } from '../../types';
+import type { MatchQuestion, ResultQuestionType } from '../../types';
 import Definitions from '../card/Definitions';
 
 type MatchQuestinComponentProps = {
     match_question: MatchQuestion[],
-    handleScoreMatch: (idTerm: number, idDefinition: number,isCount:boolean,idUpdate:boolean) => void,
-    reductCount:()=>void,
-
+    handleScoreMatch: (idTerm: number, idDefinition: number, isCount: boolean, idUpdate: boolean, isRemove: boolean, isChangeEmpty: boolean) => void,
+    reductCount: () => void,
+    faulties:ResultQuestionType[],
 }
 type Match = {
     indexSource: number,
@@ -30,7 +30,7 @@ function shuffleArray<T>(array: T[]): T[] {
     return arr;
 }
 
-function MatchQuestinComponent({ match_question, handleScoreMatch,reductCount }: MatchQuestinComponentProps) {
+function MatchQuestinComponent({ match_question, handleScoreMatch, reductCount,faulties }: MatchQuestinComponentProps) {
     const [isDragging, setIsDragging] = useState(false);
     const [definitions, setDefinitions] = useState(
         shuffleArray(
@@ -44,6 +44,13 @@ function MatchQuestinComponent({ match_question, handleScoreMatch,reductCount }:
     const [matchs, setMatchs] = useState<Match[]>(Array.from({ length: definitions.length }, () => ({ ...defaultMatch })))
 
 
+    
+    console.log(faulties) 
+    console.log(matchs)
+
+    const findValue = (idTerm:number)=>{
+        return faulties.findIndex(item=>(item.choice ===idTerm && !item.isCorrect))
+    }
 
     const handleDragStart = () => setIsDragging(true);
     const handleDragEnd = (result: DropResult) => {
@@ -59,19 +66,28 @@ function MatchQuestinComponent({ match_question, handleScoreMatch,reductCount }:
         const droppableIdDestination = destination.droppableId
         const droppableIdSource = source.droppableId
 
+        // hoan doi vi tri
         if (droppableIdDestination === droppableIdSource && droppableIdDestination === "drop") {
             const indexDestination = destination.index
             const indexSource = source.index
-            handleScoreMatch(match_question[indexDestination].id, +matchs[indexSource].id,false,true)
-            handleScoreMatch(match_question[indexSource].id, +matchs[indexDestination].id,false,true)
+
             // console.log(matchs)
             // check definition
             if (matchs[indexDestination].definition !== "" && matchs[indexSource].definition !== "") {
-
+                handleScoreMatch(match_question[indexDestination].id, +matchs[indexSource].id, false, true, false, false)
+                handleScoreMatch(match_question[indexSource].id, +matchs[indexDestination].id, false, true, false, false)
                 setMatchs(pre => {
                     const newMatchs: Match[] = [...pre];
                     [newMatchs[indexSource], newMatchs[indexDestination]] = [newMatchs[indexDestination], newMatchs[indexSource]];
                     return newMatchs;
+                })
+            } else if (matchs[indexDestination].definition === "") { // khi hoan doi vs 1 th chua co difinition
+                handleScoreMatch(match_question[indexDestination].id, +matchs[indexSource].id, false, true, false, true)
+                setMatchs(pre => {
+                    const term = [...pre]
+                    term[indexDestination] = term[indexSource]
+                    term[indexSource] = defaultMatch
+                    return term;
                 })
             }
 
@@ -79,12 +95,13 @@ function MatchQuestinComponent({ match_question, handleScoreMatch,reductCount }:
 
         if (droppableIdDestination === droppableIdSource) return
 
+        // truong hop chon
         if (droppableIdSource === "definications") {
             const indexDestination = destination.index
             const indexSource = source.index
             const definitionIndex = definitions[indexSource].definition
             const idTerm = +definitions[indexSource].id
-            handleScoreMatch(match_question[indexDestination].id, +definitions[indexSource].id,true,false)
+            handleScoreMatch(match_question[indexDestination].id, +definitions[indexSource].id, true, false, false, false)
             // if matchs[indexDestination].difinition !== "" => doi cho 
             if (matchs[indexDestination].definition !== "") {
                 const definitionMatch = matchs[indexDestination].definition
@@ -119,10 +136,11 @@ function MatchQuestinComponent({ match_question, handleScoreMatch,reductCount }:
                     return newMatchs;
                 })
             }
-        } else {
+        } else { // truong bo chon
             if (matchs[source.index].definition === "" && matchs[destination.index].definition === "") return
             const indexSourceDrag = source.index
             const { indexSource, definition } = matchs[indexSourceDrag]
+            handleScoreMatch(match_question[destination.index].id, matchs[source.index].id, false, false, true, false)
             reductCount()
             setDefinitions(pre => {
                 const newDefinitions = [...pre]
@@ -201,7 +219,7 @@ function MatchQuestinComponent({ match_question, handleScoreMatch,reductCount }:
                                                             >
                                                                 {
                                                                     matchs[index].definition !== ""
-                                                                        ? <div className='p-2.5'>
+                                                                        ? <div className={(findValue(matchs[index].id) > -1)?  'p-2.5 text-red-500' :'p-2.5'}>
                                                                             {matchs[index].definition}
                                                                         </div>
                                                                         : <span>Kéo định nghĩa vào đây</span>

@@ -13,11 +13,12 @@ function ExamDetail() {
         if (!exam) {
             //fetch data from server
         }
+        // fake data
         setExam(exam)
     }, [])
 
-    const handlePracticeExam = ()=>{
-        navigate(`practice`,{state:{exam}})
+    const handlePracticeExam = (mode:string) => {
+        navigate(`practice`, { state: { exam, mode:mode } })
     }
 
     return (
@@ -61,8 +62,8 @@ function ExamDetail() {
                         text_color="white"
                         border_color="white"
                         haveMotion={true}
-                        onClick={handlePracticeExam}
-                    />                     
+                        onClick={()=>{handlePracticeExam("training")}}
+                    />
                     <ButtonDefauld
                         height="50px"
                         text="Test Mode"
@@ -71,6 +72,7 @@ function ExamDetail() {
                         text_color="white"
                         border_color="white"
                         haveMotion={true}
+                        onClick={()=>{handlePracticeExam("test")}}
                     />
                 </motion.div>
 

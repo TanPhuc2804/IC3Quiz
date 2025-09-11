@@ -1,7 +1,8 @@
 import { Button, ConfigProvider } from 'antd'
 import React from 'react'
 
-function ButtonSubmit() {
+function ButtonSubmit({disable}:any) {
+
     return (
         <ConfigProvider
             theme={{
@@ -16,7 +17,7 @@ function ButtonSubmit() {
             }}
         >
             <div className='flex justify-center'>
-                <Button className='my-4 w-[150px] font-bold' size='large'>Nộp bài</Button>
+                <Button className='my-4 w-[150px] font-bold' size='large' disabled={!disable}>Nộp bài</Button>
             </div>
         </ConfigProvider>
 

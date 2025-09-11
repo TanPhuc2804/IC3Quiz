@@ -1,34 +1,48 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import type { Question, ResultQuestionType, ResultsType } from '../../types'
 import ButtonQuestion from '../button/ButtonQuestion'
 import { ConfigProvider, type RadioChangeEvent, type GetProp, Checkbox } from 'antd'
-import { QuestionType } from '../../types/enums'
+import { ModeEnum, QuestionType } from '../../types/enums'
 import RadioComponent from '../quiz/RadioComponent'
 import CheckBoxComponent from '../quiz/CheckBoxComponent'
 import { getOption } from '../../utils/question.utils'
 import ClassifyComponent from '../quiz/ClassifyComponent'
 import MatchQuestinComponent from '../quiz/MatchQuestinComponent'
+import { useItemQuestionContext } from '../../contexts/ItemQuestionContext'
+
+type CountQuestionType = {
+    id: number,
+    isDone: boolean
+}
+
 type QuestionNormalProp = {
     question: Question,
-    setResults: React.Dispatch<React.SetStateAction<ResultsType[]>>
+    setResults: React.Dispatch<React.SetStateAction<ResultsType[]>>,
+    setCountQuestionResult: React.Dispatch<React.SetStateAction<CountQuestionType[]>>,
+    mode:string
 }
 
 const resultNormalInit: ResultQuestionType = {
-    isCorrect: false,
+    isCorrect: true,
     choice: "",
     anwser_correct: ""
 }
-function QuestionComponent({ question, setResults }: QuestionNormalProp) {
+function QuestionComponent({ question, setResults, setCountQuestionResult,mode }: QuestionNormalProp) {
+
+    const { changBgItemQuestion } = useItemQuestionContext()
+    const [isChoice, setIsChoice] = useState(false)
     const [valueNormal, setValueNormal] = useState("");
     const [option, setOptions] = useState<any>([])
-
     const [valueMultiple, setValueMultiple] = useState<any[]>([])
 
     const [answersClassify, setAnswersClassify] = useState<Record<string | number, string>>({});
     const [countMatch, setCountMatch] = useState(0)
     const [resultNormal, setResultNormal] = useState<ResultQuestionType>(resultNormalInit)
     const [resultQuestion, setResultQuestion] = useState<ResultQuestionType[]>([])
+    const [isFaulty, setIsFaulty] = useState(false)
+    const [faulties,setFaulties] = useState<ResultQuestionType[]>([])
     const LENGHT_MATCH_QUESTION = question.match_question?.length ?? 0
+
     useEffect(() => {
         switch (question.question_type) {
             case QuestionType.NORMAL: {
@@ -87,30 +101,62 @@ function QuestionComponent({ question, setResults }: QuestionNormalProp) {
             return newResult
 
         })
-    }, [resultQuestion, resultNormal])
 
+        if (mode===ModeEnum.TRAINING) {
+            if (question.question_type === QuestionType.NORMAL) {
+                setIsFaulty(!resultNormal.isCorrect)
+            } else {
+                const isFalses = resultQuestion.filter(item => !item.isCorrect)
+                setFaulties(isFalses)
+                setIsFaulty((isFalses.length > 0))
+            }
+        }
+
+        if (isChoice) {
+            setCountQuestionResult(pre => {
+                const term = [...pre]
+                const indexContaint = term.findIndex(item => item.id === question.id)
+                if (indexContaint !== -1) {
+                    term[indexContaint].isDone = true
+                    return term
+                }
+                return [
+                    ...pre,
+                    {
+                        id: question.id,
+                        isDone : true
+                    }
+                ]
+            })
+            changBgItemQuestion(question.question, isChoice)
+        } else {
+            setCountQuestionResult(pre => pre.filter(item => item.id !== question.id))
+            changBgItemQuestion(question.question, isChoice)
+        }
+    }, [resultQuestion, resultNormal])
+    // console.log(faulties)
     const getComponentType = (type: string) => {
         switch (type) {
             case QuestionType.NORMAL: {
                 return (
-                    <RadioComponent onChange={onChangeRadio} value={valueNormal} option={option} />
+                    <RadioComponent onChange={onChangeRadio} value={valueNormal} option={option} isFaulty ={isFaulty} mode={mode}/>
                 )
 
             }
             case QuestionType.MULTIPLE: {
                 return (
-                    <CheckBoxComponent onChange={onChangeCheckBox} options={option} limit_choice={question?.limit_choice ?? 0} />
+                    <CheckBoxComponent onChange={onChangeCheckBox} options={option} limit_choice={question?.limit_choice ?? 0} faulties={faulties}  mode={mode}/>
                 )
             }
             case QuestionType.CLASSIFY: {
                 return (
-                    <ClassifyComponent classify_question={question?.classify_question ?? []} handleChange={handleChangeClassify} answers={answersClassify} />
+                    <ClassifyComponent classify_question={question?.classify_question ?? []} handleChange={handleChangeClassify} answers={answersClassify} faulties={faulties} mode={mode}/>
                 )
             }
             case QuestionType.DROP_MATCH: {
                 return (
 
-                    <MatchQuestinComponent match_question={question.match_question ?? []} handleScoreMatch={handleScoreMatch} reductCount={reductCount} />
+                    <MatchQuestinComponent match_question={question.match_question ?? []} handleScoreMatch={handleScoreMatch} reductCount={reductCount} faulties={faulties} />
                 )
             }
             default: {
@@ -127,6 +173,7 @@ function QuestionComponent({ question, setResults }: QuestionNormalProp) {
     const handleChangeClassify = (questionId: string | number, value: string) => {
         const classifyQuestion = question.classify_question
         const classify = classifyQuestion?.filter(item => item.id === questionId)[0]
+        if (!classifyQuestion) return
         setResultQuestion(pre => {
 
             if (pre.length === 0) {
@@ -168,6 +215,9 @@ function QuestionComponent({ question, setResults }: QuestionNormalProp) {
             ...prev,
             [questionId]: value,
         }));
+        if (Object.values(answersClassify).length + 1 === classifyQuestion?.length) {
+            setIsChoice(true)
+        }
     };
 
     // Cham chon dap an
@@ -181,40 +231,57 @@ function QuestionComponent({ question, setResults }: QuestionNormalProp) {
             choice: value
         }))
         setValueNormal(value);
-
+        setIsChoice(true)
     };
 
-    const handleScoreMatch = (idTerm: number, idDefinition: number, count: boolean, isUpdate: boolean) => {
+    const handleScoreMatch = (idTerm: number, idDefinition: number, count: boolean, isUpdate: boolean, isRemove: boolean, isChangeEmpty: boolean) => {
         if (count) {
             setCountMatch(pre => {
                 const newCount = pre === LENGHT_MATCH_QUESTION ? LENGHT_MATCH_QUESTION : pre + 1;
+                setIsChoice((pre + 1) === LENGHT_MATCH_QUESTION)
                 return newCount;
             });
         }
-        // if (countMatch === LENGHT_MATCH_QUESTION) {
-        //     // chua t hanh cong
-        // }
+
+        if (isChangeEmpty) {
+            setResultQuestion((pre: ResultQuestionType[]) => {
+                const rusultTerm = [...pre]
+                const newResults = rusultTerm.map(item => {
+                    if (item.choice === idDefinition) {
+                        return {
+                            ...item,
+                            isCorrect: idDefinition === idTerm,
+                            choice: idDefinition,
+                            anwser_correct: idTerm
+                        }
+                    }
+                    return item
+
+                })
+                return newResults
+            })
+        }
+        if (isRemove) {
+            setResultQuestion(pre => pre.filter(item => item.choice !== idDefinition));
+            return
+        }
+
         if (!isUpdate) {
             setResultQuestion((pre: ResultQuestionType[]) => {
-                if (idDefinition === idTerm) {
-                    return [
-                        ...pre,
-                        {
-                            isCorrect: true,
-                            choice: idDefinition,
-                            anwser_correct: idTerm
-                        }
-                    ];
-                } else {
-                    return [
-                        ...pre,
-                        {
-                            isCorrect: false,
-                            choice: idDefinition,
-                            anwser_correct: idTerm
-                        }
-                    ];
+                const indexContainResult = pre.findIndex(item => item.anwser_correct === idTerm)
+                if (indexContainResult !== -1 && pre.length > 0) {
+                    pre[indexContainResult].choice = idDefinition
+                    pre[indexContainResult].isCorrect = idDefinition === idTerm
+                    return pre
                 }
+                return [
+                    ...pre,
+                    {
+                        isCorrect: idTerm === idDefinition,
+                        choice: idDefinition,
+                        anwser_correct: idTerm
+                    }
+                ];
             });
         } else {
             setResultQuestion((pre: ResultQuestionType[]) => {
@@ -233,9 +300,12 @@ function QuestionComponent({ question, setResults }: QuestionNormalProp) {
             })
         }
 
+
     }
+
     const reductCount = () => {
         setCountMatch(pre => {
+            setIsChoice(false)
             let count = pre
             if (count === 0) {
                 return 0
@@ -260,9 +330,15 @@ function QuestionComponent({ question, setResults }: QuestionNormalProp) {
             });
         setResultQuestion(resultQuestion)
         setValueMultiple(values)
+        if (values.length === question.limit_choice) {
+            setIsChoice(true)
+        } else {
+            setIsChoice(false)
+        }
     };
 
     const testData = (type: string) => {
+        if (type != QuestionType.MULTIPLE) return
         if (type === QuestionType.CLASSIFY) {
             console.log("Classify " + " Question: " + question.id, answersClassify)
             return
@@ -280,9 +356,53 @@ function QuestionComponent({ question, setResults }: QuestionNormalProp) {
             return
         }
     }
+
+    const getCorrectAnwser = (type: string) => {
+        if (type === QuestionType.NORMAL) {
+            return question.correct_answer
+        }
+        if (type === QuestionType.DROP_MATCH) {
+            let correct = ""
+            question.match_question?.forEach(item => {
+                correct += item.term + ": " + item.definition + "\n"
+            })
+            return correct
+        }
+        if (type === QuestionType.MULTIPLE) {
+            let correct = ""
+            question.multiple_question?.forEach(item => {
+                if (item.is_correct) {
+                    correct += item.option_text + "\n"
+                }
+            })
+            return correct
+        }
+        if (type === QuestionType.CLASSIFY) {
+            let correct = ""
+            const grounded = Object.values(
+                question.classify_question?.reduce((acc: { [key: string]: { classify: string, contents: string[] } }, item) => {
+                    if (!acc[item.classify]) {
+                        acc[item.classify] = {
+                            classify: item.classify,
+                            contents: [],
+                        };
+                    }
+                    acc[item.classify].contents.push(item.content);
+                    return acc;
+                }, {} as { [key: string]: { classify: string, contents: string[] } }) ?? {}
+            );
+            grounded.map(item => {
+                correct += "\n" + item.classify + ":"
+                item.contents.map(content => {
+                    correct += " " + content + ""
+                })
+            })
+            return correct
+        }
+        return "Test"
+    }
     // testData(question.question_type)
-
-
+    // console.log(getCorrectAnwser(question.question_type))
     return (
         <ConfigProvider
             theme={{
@@ -294,12 +414,28 @@ function QuestionComponent({ question, setResults }: QuestionNormalProp) {
                 },
             }}
         >
-            <div className='flex gap-3 my-8'>
-                <ButtonQuestion content={question?.question} />
-                <div className='flex flex-col gap-3'>
-                    <p>{question?.content}</p>
-                    {getComponentType(question.question_type)}
+            <div>
+
+                <div className='flex gap-3 my-8'>
+                    <ButtonQuestion content={question?.question} />
+                    <div className='flex flex-col gap-3'>
+                        <p>{question?.content}</p>
+                        {getComponentType(question.question_type)}
+                    </div>
                 </div>
+                {
+                    isFaulty ? (
+                        <div className='text-emerald-500 m-[30px] font-bold whitespace-pre-line'>
+                            Đáp án đúng:
+                            <div className='ml-[30px]'>
+                                {getCorrectAnwser(question.question_type)}
+
+                            </div>
+                        </div>
+                    ) : <Fragment />
+                }
+
+
             </div>
         </ConfigProvider>
 

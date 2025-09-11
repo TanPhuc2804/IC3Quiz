@@ -17,7 +17,7 @@ function Header() {
         className='flex gap-7.5 text-[16px]'
       >
         <NavItem label="Trang chủ" link='/' />
-        <NavItem label="Bài kiểm tra IC3" link='/' />
+        <NavItem label="Bài kiểm tra IC3" link='/exams' />
         <NavItem label="Về chúng tôi" link='/about-us' />
         <NavItem label="Đăng nhập/ Đăng ký" link='/login' />
 
