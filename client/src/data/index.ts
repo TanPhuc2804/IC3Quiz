@@ -1,4 +1,4 @@
-import type { Category, Exam, Question, User } from "../types";
+import type { Category, Exam, Exam_Result, Question, User } from "../types";
 
 export const user: User = {
   id: 1,
@@ -735,17 +735,17 @@ export const questions: Question[] = [
     "question_type": "drop_match",
     "match_question": [
       {
-        "id":1,
+        "id": 1,
         "term": "Loa thông minh",
         "definition": "Có thể ghi âm những người ở gần xung quanh và thường không quay được Video. "
       },
       {
-        "id":2,
+        "id": 2,
         "term": "Chuông cửa thông minh",
         "definition": "Có thể quay Video và thu âm những người ở trước nhà."
       },
       {
-        "id":3,
+        "id": 3,
         "term": "Webcam",
         "definition": "Có thể quay Video những người ngồi trước bàn phím và thu âm vùng gần xung quanh. "
       }
@@ -775,3 +775,161 @@ export const questions: Question[] = [
   //   ]
   // }
 ]
+
+
+export const results: Exam_Result={
+  user_id: 1,
+  exam: exams[0],
+  submit_time: 12,
+  score: 1.4,
+  accurary_percentage: 28, // phan tram dung
+  error_percentage: 72,// phan tram sai
+  total_content: 7,
+  result_detail: [
+    {
+      "question_id": 1,
+      "question_type": "normal",
+      "user_answer": {
+        "isCorrect": false,
+        "choice": "A",
+        "anwser_correct": "D"
+      }
+    },
+    {
+      "question_id": 2,
+      "question_type": "classify",
+      "user_answer": [
+        {
+          "choice": "Thiết bị đầu vào (Input Device)",
+          "id_classify": 4,
+          "isCorrect": true,
+          "anwser_correct": "Thiết bị đầu vào (Input Device)"
+        },
+        {
+          "id_classify": 5,
+          "choice": "Thiết bị đầu ra (Output Device)",
+          "isCorrect": false,
+          "anwser_correct": "Thiết bị đầu vào (Input Device)"
+        },
+        {
+          "id_classify": 6,
+          "choice": "Thiết bị đầu ra (Output Device)",
+          "isCorrect": true,
+          "anwser_correct": "Thiết bị đầu ra (Output Device)"
+        },
+        {
+          "id_classify": 7,
+          "choice": "Thiết bị đầu vào (Input Device)",
+          "isCorrect": false,
+          "anwser_correct": "Thiết bị đầu ra (Output Device)"
+        },
+        {
+          "id_classify": 8,
+          "choice": "Thiết bị đầu vào (Input Device)",
+          "isCorrect": true,
+          "anwser_correct": "Thiết bị đầu vào (Input Device)"
+        }
+      ]
+    },
+    {
+      "question_id": 3,
+      "question_type": "classify",
+      "user_answer": [
+        {
+          "choice": "Đúng",
+          "id_classify": 1,
+          "isCorrect": true,
+          "anwser_correct": "Đúng"
+        },
+        {
+          "id_classify": 2,
+          "choice": "Sai",
+          "isCorrect": true,
+          "anwser_correct": "Sai"
+        },
+        {
+          "id_classify": 3,
+          "choice": "Đúng",
+          "isCorrect": true,
+          "anwser_correct": "Đúng"
+        }
+      ]
+    },
+    {
+      "question_id": 11,
+      "question_type": "multiple",
+      "user_answer": [
+        {
+          "isCorrect": false,
+          "choice": "A"
+        },
+        {
+          "isCorrect": true,
+          "choice": "B"
+        },
+        {
+          "isCorrect": true,
+          "choice": "C"
+        },
+        {
+          "isCorrect": false,
+          "choice": "D"
+        }
+      ]
+    },
+    {
+      "question_id": 12,
+      "question_type": "multiple",
+      "user_answer": [
+        {
+          "isCorrect": true,
+          "choice": "C"
+        },
+        {
+          "isCorrect": true,
+          "choice": "D"
+        },
+        {
+          "isCorrect": true,
+          "choice": "E"
+        },
+        {
+          "isCorrect": true,
+          "choice": "F"
+        }
+      ]
+    },
+    {
+      "question_id": 13,
+      "question_type": "normal",
+      "user_answer": {
+        "isCorrect": false,
+        "choice": "A",
+        "anwser_correct": "B"
+      }
+    },
+    {
+      "question_id": 37,
+      "question_type": "drop_match",
+      "user_answer": [
+        {
+          "isCorrect": false,
+          "choice": 2,
+          "anwser_correct": 3
+        },
+        {
+          "isCorrect": false,
+          "choice": 3,
+          "anwser_correct": 2
+        },
+        {
+          "isCorrect": true,
+          "choice": 1,
+          "anwser_correct": 1
+        }
+      ]
+    }
+  ]
+}
+ 
+

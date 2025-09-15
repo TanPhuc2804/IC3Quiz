@@ -57,25 +57,25 @@ export interface Mutiple_Question {
 
 export interface Exam_Result {
     user_id: number,
-    exam_id: number,
+    exam: Exam,
     submit_time: number,
     score: number,
-    accurary_percentage: number // phan tram dung
-    error_percentage: number // phan tram sai
-    total_content: number
-}
-
-export interface Result_Detail {
-    result_id: number,
-    question_id: number,
-    is_correct: number,
-    user_answer: string,
+    accurary_percentage: number, // phan tram dung
+    error_percentage: number,// phan tram sai
+    total_content: number,
+    result_detail:ResultsType[]
 }
 
 export interface Category {
     id: number,
     content: string,
     image_url: string
+}
+
+export type ResultsType={
+    question_id:number,
+    question_type:string,
+    user_answer?:ResultQuestionType|ResultQuestionType[] 
 }
 
 export type ResultQuestionType = {
@@ -85,8 +85,17 @@ export type ResultQuestionType = {
     anwser_correct?: any
 }
 
-export type ResultsType={
-    question_id:number,
-    question_type:string,
-    user_answer?:string | string[] | ResultQuestionType|ResultQuestionType[] | Record<string | number, string>[]
+export type QuestionTableType= {
+    id:number,
+    question:number,
+    is_correct:boolean
+}
+
+export type TableResult = {
+    question_type:Question["question_type"],
+    correct_total:number,
+    incorrect_total:number,
+    overlook_total:number,
+    accurary_percentage:number,
+    questions:QuestionTableType[]
 }

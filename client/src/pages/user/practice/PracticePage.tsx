@@ -43,7 +43,7 @@ function PracticePage() {
         setQuestionsFliter(questionFilter)
         setIsDone(mode === ModeEnum.TRAINING)
     }, [questions])
-
+    console.log(results)
     useEffect(() => {
         if (mode === ModeEnum.TRAINING)
             return

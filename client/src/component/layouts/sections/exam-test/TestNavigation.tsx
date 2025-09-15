@@ -24,7 +24,7 @@ const changeMinutesToSeconds = (minutes:number)=>minutes*60
 
 function TestNavigation({ questionsProp,isDone,duration }: TestNavigationProp) {
     const [timer, setTimer] = useState(0)
-    const maxDuration = changeMinutesToSeconds(0.25)
+    const maxDuration = changeMinutesToSeconds(duration)
     useEffect(() => {
         const timer = setInterval(() => {
             setTimer(pre => {
