@@ -43,7 +43,6 @@ function PracticePage() {
         setQuestionsFliter(questionFilter)
         setIsDone(mode === ModeEnum.TRAINING)
     }, [questions])
-    console.log(results)
     useEffect(() => {
         if (mode === ModeEnum.TRAINING)
             return
@@ -78,8 +77,6 @@ function PracticePage() {
 
     }
 
-    console.table(results)
-
     return (
         <QuestionContext.Provider value={{ questionRefs, scrollToQuestion }}>
             <ItemQuestionContext.Provider value={{ itemRef: itemQuestionRefs, changBgItemQuestion }}>
@@ -105,7 +102,15 @@ function PracticePage() {
 
                         </div>
                         <div className='sticky top-5 bg-white shadow-[0_2px_4px_rgba(0,0,0,0.08),0_4px_12px_rgba(0,0,0,0.08)] p-4 max-w-[200px] max-h-[600px]'>
-                            <TestNavigation duration={exam?.duration ?? 0} questionsProp={questionsFilter} isDone={isDone} />
+                            {exam && (
+                                <TestNavigation
+                                    exam={exam}
+                                    results={results}
+                                    duration={exam.duration}
+                                    questionsProp={questionsFilter}
+                                    isDone={isDone}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>

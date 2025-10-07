@@ -45,8 +45,8 @@ function MatchQuestinComponent({ match_question, handleScoreMatch, reductCount,f
 
 
     
-    console.log(faulties) 
-    console.log(matchs)
+    // console.log(faulties) 
+    // console.log(matchs)
 
     const findValue = (idTerm:number)=>{
         return faulties.findIndex(item=>(item.choice ===idTerm && !item.isCorrect))

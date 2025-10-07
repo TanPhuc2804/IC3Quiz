@@ -9,6 +9,7 @@ import { getOption } from '../../utils/question.utils'
 import ClassifyComponent from '../quiz/ClassifyComponent'
 import MatchQuestinComponent from '../quiz/MatchQuestinComponent'
 import { useItemQuestionContext } from '../../contexts/ItemQuestionContext'
+import { motion, AnimatePresence } from "framer-motion";
 
 type CountQuestionType = {
     id: number,
@@ -19,7 +20,7 @@ type QuestionNormalProp = {
     question: Question,
     setResults: React.Dispatch<React.SetStateAction<ResultsType[]>>,
     setCountQuestionResult: React.Dispatch<React.SetStateAction<CountQuestionType[]>>,
-    mode:string
+    mode: string
 }
 
 const resultNormalInit: ResultQuestionType = {
@@ -27,7 +28,7 @@ const resultNormalInit: ResultQuestionType = {
     choice: "",
     anwser_correct: ""
 }
-function QuestionComponent({ question, setResults, setCountQuestionResult,mode }: QuestionNormalProp) {
+function QuestionComponent({ question, setResults, setCountQuestionResult, mode }: QuestionNormalProp) {
 
     const { changBgItemQuestion } = useItemQuestionContext()
     const [isChoice, setIsChoice] = useState(false)
@@ -40,7 +41,7 @@ function QuestionComponent({ question, setResults, setCountQuestionResult,mode }
     const [resultNormal, setResultNormal] = useState<ResultQuestionType>(resultNormalInit)
     const [resultQuestion, setResultQuestion] = useState<ResultQuestionType[]>([])
     const [isFaulty, setIsFaulty] = useState(false)
-    const [faulties,setFaulties] = useState<ResultQuestionType[]>([])
+    const [faulties, setFaulties] = useState<ResultQuestionType[]>([])
     const LENGHT_MATCH_QUESTION = question.match_question?.length ?? 0
 
     useEffect(() => {
@@ -83,6 +84,7 @@ function QuestionComponent({ question, setResults, setCountQuestionResult,mode }
                     ...pre,
                     {
                         question_id: question.id,
+                        question: question.question,
                         question_type: question.question_type
 
                     }
@@ -102,7 +104,7 @@ function QuestionComponent({ question, setResults, setCountQuestionResult,mode }
 
         })
 
-        if (mode===ModeEnum.TRAINING) {
+        if (mode === ModeEnum.TRAINING) {
             if (question.question_type === QuestionType.NORMAL) {
                 setIsFaulty(!resultNormal.isCorrect)
             } else {
@@ -124,7 +126,7 @@ function QuestionComponent({ question, setResults, setCountQuestionResult,mode }
                     ...pre,
                     {
                         id: question.id,
-                        isDone : true
+                        isDone: true
                     }
                 ]
             })
@@ -134,23 +136,22 @@ function QuestionComponent({ question, setResults, setCountQuestionResult,mode }
             changBgItemQuestion(question.question, isChoice)
         }
     }, [resultQuestion, resultNormal])
-    // console.log(faulties)
     const getComponentType = (type: string) => {
         switch (type) {
             case QuestionType.NORMAL: {
                 return (
-                    <RadioComponent onChange={onChangeRadio} value={valueNormal} option={option} isFaulty ={isFaulty} mode={mode}/>
+                    <RadioComponent onChange={onChangeRadio} value={valueNormal} option={option} isFaulty={isFaulty} mode={mode} />
                 )
 
             }
             case QuestionType.MULTIPLE: {
                 return (
-                    <CheckBoxComponent onChange={onChangeCheckBox} options={option} limit_choice={question?.limit_choice ?? 0} faulties={faulties}  mode={mode}/>
+                    <CheckBoxComponent onChange={onChangeCheckBox} options={option} limit_choice={question?.limit_choice ?? 0} faulties={faulties} mode={mode} />
                 )
             }
             case QuestionType.CLASSIFY: {
                 return (
-                    <ClassifyComponent classify_question={question?.classify_question ?? []} handleChange={handleChangeClassify} answers={answersClassify} faulties={faulties} mode={mode}/>
+                    <ClassifyComponent classify_question={question?.classify_question ?? []} handleChange={handleChangeClassify} answers={answersClassify} faulties={faulties} mode={mode} />
                 )
             }
             case QuestionType.DROP_MATCH: {
@@ -415,27 +416,46 @@ function QuestionComponent({ question, setResults, setCountQuestionResult,mode }
             }}
         >
             <div>
-
-                <div className='flex gap-3 my-8'>
-                    <ButtonQuestion content={question?.question} />
-                    <div className='flex flex-col gap-3'>
+                <motion.div
+                    className="flex gap-3 my-8"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                >
+                    <ButtonQuestion size="large" content={question?.question} />
+                    <motion.div
+                        className="flex flex-col gap-3"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.2, duration: 0.4 }}
+                    >
                         <p>{question?.content}</p>
                         {getComponentType(question.question_type)}
-                    </div>
-                </div>
-                {
-                    isFaulty ? (
-                        <div className='text-emerald-500 m-[30px] font-bold whitespace-pre-line'>
+                    </motion.div>
+                </motion.div>
+
+                <AnimatePresence>
+                    {isFaulty && (
+                        <motion.div
+                            key="answer"
+                            className="text-emerald-500 m-[30px] font-bold whitespace-pre-line"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: 0.3 }}
+                        >
                             Đáp án đúng:
-                            <div className='ml-[30px]'>
+                            <motion.div
+                                className="ml-[30px]"
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.2, duration: 0.3 }}
+                            >
                                 {getCorrectAnwser(question.question_type)}
-
-                            </div>
-                        </div>
-                    ) : <Fragment />
-                }
-
-
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </ConfigProvider>
 

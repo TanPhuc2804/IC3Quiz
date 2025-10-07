@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import type { TableResult, ResultsType, Question, QuestionTableType } from '../../types'
 import { Table, Tag, type TableProps } from 'antd';
 import { QuestionType as TypeEnum } from '../../types/enums';
+import { motion } from "framer-motion";
 
 type QuestionType = "normal" | "classify" | "multiple" | "drop_match";
 
@@ -20,7 +21,7 @@ function TableSatisticsResult({ questions }: TableSatisticsResultType) {
             drop_match: []
         }
 
-        data.forEach(value => {
+        data?.forEach(value => {
             grouded[value.question_type as QuestionType].push(value)
         })
 
@@ -39,18 +40,18 @@ function TableSatisticsResult({ questions }: TableSatisticsResultType) {
                     const allCorrect = q.user_answer.every(item => item.isCorrect)
                     if (allCorrect) {
                         correct_total++
-                        questionTable.push({ question: q.question_id, id: q.question_id, is_correct: true })
+                        questionTable.push({ question: q.question, id: q.question_id, is_correct: true })
 
                         return
                     }
-                    questionTable.push({ question: q.question_id, id: q.question_id, is_correct: false })
+                    questionTable.push({ question: q.question, id: q.question_id, is_correct: false })
 
                     incorrect_total++
                     return
                 }
                 if (q.user_answer.isCorrect) correct_total++
                 incorrect_total++
-                questionTable.push({ question: q.question_id, id: q.question_id, is_correct: q.user_answer.isCorrect })
+                questionTable.push({ question: q.question, id: q.question_id, is_correct: q.user_answer.isCorrect })
 
             })
             const total = correct_total + incorrect_total + overlook_total
@@ -114,7 +115,7 @@ function TableSatisticsResult({ questions }: TableSatisticsResultType) {
                     {questions.map(item => (
                         <Tag
                             key={item.id}
-                            color={item.is_correct ? "green" :"red" }
+                            color={item.is_correct ? "green" : "red"}
                         >
                             {item.question}
                         </Tag>
@@ -126,9 +127,13 @@ function TableSatisticsResult({ questions }: TableSatisticsResultType) {
     ]
 
     return (
-        <div>
-                <Table dataSource={itemsTable} columns={columns} />
-        </div>
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+        >
+            <Table dataSource={itemsTable} columns={columns} />
+        </motion.div>
     )
 }
 

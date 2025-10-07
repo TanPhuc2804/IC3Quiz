@@ -2,10 +2,11 @@ import { Button, ConfigProvider } from 'antd'
 import React from 'react'
 
 type ButtonQuestionProp= {
-  content:string|number
+  content:string|number,
+  size: "large" | "middle" | "small"
 }
 
-function ButtonQuestion({content}:ButtonQuestionProp) {
+function ButtonQuestion({content,size}:ButtonQuestionProp) {
   return (
     <ConfigProvider
       theme={{
@@ -22,7 +23,7 @@ function ButtonQuestion({content}:ButtonQuestionProp) {
       }}
     >
       <div>
-        <Button shape='circle' size='large'>{content}</Button>
+        <Button shape='circle' size={size}>{content}</Button>
       </div>
     </ConfigProvider>
   )

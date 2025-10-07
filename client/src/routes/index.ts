@@ -1,5 +1,6 @@
 import MatchQuestinComponent from "../component/quiz/MatchQuestinComponent"
 import Home from "../pages/Home"
+import AuthPage from "../pages/auth/AuthPage"
 import Login from "../pages/auth/Login"
 import ExamDetail from "../pages/user/exam/ExamDetail"
 import ExamPage from "../pages/user/exam/ExamPage"
@@ -12,7 +13,7 @@ export const publicRoutes = [
     { path: "/exams/:id", component: ExamDetail, isLayout: true },
     { path: "/exams/:id/practice", component: PracticePage, isLayout: true },
     { path: "/exams/:id/result", component: ExamResult, isLayout: true },
-    { path: "/login", component: Login, isLayout: false }
+    { path: "/login", component: AuthPage, isLayout: false }
 
 ]
 

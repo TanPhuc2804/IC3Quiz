@@ -788,6 +788,7 @@ export const results: Exam_Result={
   result_detail: [
     {
       "question_id": 1,
+      "question": 1,
       "question_type": "normal",
       "user_answer": {
         "isCorrect": false,
@@ -797,12 +798,13 @@ export const results: Exam_Result={
     },
     {
       "question_id": 2,
+       "question": 2,
       "question_type": "classify",
       "user_answer": [
         {
           "choice": "Thiết bị đầu vào (Input Device)",
           "id_classify": 4,
-          "isCorrect": true,
+          "isCorrect": true,  
           "anwser_correct": "Thiết bị đầu vào (Input Device)"
         },
         {
@@ -833,6 +835,7 @@ export const results: Exam_Result={
     },
     {
       "question_id": 3,
+       "question": 3,
       "question_type": "classify",
       "user_answer": [
         {
@@ -857,6 +860,7 @@ export const results: Exam_Result={
     },
     {
       "question_id": 11,
+       "question": 11,
       "question_type": "multiple",
       "user_answer": [
         {
@@ -879,6 +883,7 @@ export const results: Exam_Result={
     },
     {
       "question_id": 12,
+       "question": 12,
       "question_type": "multiple",
       "user_answer": [
         {
@@ -901,6 +906,7 @@ export const results: Exam_Result={
     },
     {
       "question_id": 13,
+       "question": 13,
       "question_type": "normal",
       "user_answer": {
         "isCorrect": false,
@@ -910,6 +916,7 @@ export const results: Exam_Result={
     },
     {
       "question_id": 37,
+       "question": 37,
       "question_type": "drop_match",
       "user_answer": [
         {
@@ -932,4 +939,3 @@ export const results: Exam_Result={
   ]
 }
  
-

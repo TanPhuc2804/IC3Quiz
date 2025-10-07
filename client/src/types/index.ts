@@ -75,6 +75,7 @@ export interface Category {
 export type ResultsType={
     question_id:number,
     question_type:string,
+    question:number,
     user_answer?:ResultQuestionType|ResultQuestionType[] 
 }
 
