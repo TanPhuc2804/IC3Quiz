@@ -9,6 +9,8 @@ import ButtonQuestion from '../../../component/button/ButtonQuestion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { useLocation } from 'react-router'
+import { useParams } from "react-router-dom";
+import axios from 'axios'
 
 function shortenByWords(str: string | number, maxWords = 4): string {
     const words = str.toString().split(" ");
@@ -16,6 +18,7 @@ function shortenByWords(str: string | number, maxWords = 4): string {
     return words.slice(0, maxWords).join(" ") + " ...";
 }
 function ExamResult() {
+    const params = useParams()
     const [examResult, setExamResult] = useState<Exam_Result>()
     const [questionsResult, setQuestionsResult] = useState<ResultsType[]>([])
     const location = useLocation()
@@ -30,9 +33,9 @@ function ExamResult() {
     }, [questionsResult])
 
     const total_omit = useMemo(() => {
-        return questionsResult.filter(item=>(!item.user_answer || (Array.isArray(item.user_answer) && item.user_answer.length === 0))).length
+        return questionsResult.filter(item => (!item.user_answer || (Array.isArray(item.user_answer) && item.user_answer.length === 0))).length
     }, [questionsResult])
-    
+
     useEffect(() => {
         // fetch data 
         if (location.state) {
@@ -40,7 +43,16 @@ function ExamResult() {
             console.log(location.state)
             setExamResult(results)
             setQuestionsResult(results.result_detail)
+            return
         }
+        //fetch data
+        const fetchData = async () => {
+            const apiUrl = import.meta.env.VITE_API_URL
+            const response = await axios.get(`${apiUrl}/users/result/${params.id}`, { withCredentials: true })
+            setExamResult(response.data)
+            setQuestionsResult(response.data.result_detail)
+        }
+        fetchData()
 
     }, [])
     console.log(examResult)
@@ -98,7 +110,7 @@ function ExamResult() {
                                 <div className='flex flex-row justify-around gap-1.5'>
                                     <StatisticsResult status={true} number={total_correct} content='Trả lời đúng' />
                                     <StatisticsResult status={false} number={(examResult?.total_content ?? 0) - total_omit - total_correct} content='Trả lời sai' />
-                                    <StatisticsResult status={true} minus={true} number={total_omit} content='Không trả lời'/>
+                                    <StatisticsResult status={true} minus={true} number={total_omit} content='Không trả lời' />
                                 </div>
 
                             </div>

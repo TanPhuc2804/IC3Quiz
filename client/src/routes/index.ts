@@ -13,6 +13,7 @@ export const publicRoutes = [
     { path: "/exams/:id", component: ExamDetail, isLayout: true },
     { path: "/exams/:id/practice", component: PracticePage, isLayout: true },
     { path: "/exams/:id/result", component: ExamResult, isLayout: true },
+    { path: "/exams/user-result/:id", component: ExamResult, isLayout: true },
     { path: "/login", component: AuthPage, isLayout: false }
 
 ]

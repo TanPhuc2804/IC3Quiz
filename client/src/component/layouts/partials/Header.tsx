@@ -1,6 +1,11 @@
+import { useAuth } from '../../../contexts/AuthContext'
+import DropdownUser from '../../dropdown/DropdownUser';
 import NavItem from './NavItem'
 import { motion } from "motion/react"
 function Header() {
+
+  const { user } = useAuth();
+
   return (
     <div className='bg-primary-black-pearl flex justify-between items-center py-2 px-24 '>
       <motion.img
@@ -19,7 +24,11 @@ function Header() {
         <NavItem label="Trang chủ" link='/' />
         <NavItem label="Bài kiểm tra IC3" link='/exams' />
         <NavItem label="Về chúng tôi" link='/about-us' />
-        <NavItem label="Đăng nhập/ Đăng ký" link='/login' />
+
+        {
+          user ? (<DropdownUser content={user.fullname ?? user.email} />) : <NavItem label="Đăng nhập/ Đăng ký" link='/login' />
+        }
+
 
       </motion.div>
 

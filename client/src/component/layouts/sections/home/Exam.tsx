@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import type { Exam as ExamType } from "../../../../types/index"
 import { exams as examsData } from '../../../../data'
 import ExamCard from '../../../card/ExamCard'
-import ButtonViewMore from '../../../button/ButtonViewMore'
-import { motion } from "framer-motion"
-
+import axios from 'axios'
 type ExamProp ={
     totalItem?:number
 }
@@ -12,11 +10,17 @@ type ExamProp ={
 function Exam({totalItem=0}:ExamProp) {
     const [exams, setExams] = useState<ExamType[]>([])
     useEffect(() => {
-        if(totalItem ==0){
-            setExams(examsData)
+        const apiUrl = import.meta.env.VITE_API_URL
+        const fetchExams = async ()=>{
+            const exams = await axios.get(`${apiUrl}/exams`)
+             if(totalItem ==0){
+            setExams(exams.data)
             return
         }
-        setExams(examsData.slice(0, 3))
+        setExams(exams.data.slice(0, 3))
+        }
+        fetchExams()
+       
     }, [])
 
     return (

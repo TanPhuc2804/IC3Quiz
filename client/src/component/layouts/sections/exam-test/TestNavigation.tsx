@@ -4,8 +4,7 @@ import TestQuestionListItem from '../../../card/TestQuestionListItem'
 import { useNavigate, useParams } from 'react-router'
 import type { Exam, Exam_Result, ResultQuestionType, ResultsType } from '../../../../types'
 import { QuestionType } from '../../../../types/enums'
-
-
+import axios from 'axios'
 
 type QuestionFilter = {
     id: number,
@@ -89,8 +88,17 @@ function TestNavigation({ questionsProp, isDone, duration, results, exam }: Test
 
     const handleSubmit = () => {
         const resultExam = calculateResult(results, exam, timer)
-        console.log(resultExam)
-        navigate(`/exams/${id}/result`, { state: { results:resultExam } })
+        const apiUrl = import.meta.env.VITE_API_URL
+        axios.post(`${apiUrl}/users/save-result`, { ...resultExam, exam: resultExam.exam._id }, { withCredentials: true })
+            .then(response => {
+                console.log(response.data)
+                navigate(`/exams/${id}/result`, { state: { results: resultExam } })
+            })
+            .catch(error => {
+                alert("Error: ")
+                console.log(error)
+            });
+
     }
 
     return (

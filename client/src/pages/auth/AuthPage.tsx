@@ -3,16 +3,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEnvelope, faLock, faUser, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"
 import { faFacebook, faGoogle, faInstagram, faTwitter } from "@fortawesome/free-brands-svg-icons"
 import { useState } from "react"
+import axios from "axios"
+import { showMessage } from "../../component/notification/Message"
 type Props = {}
 type formLogin = {
   username: string,
   password: string
 }
 type user = {
-  id:string;
-  fullname:string;
-  email:string;
-  isLogin:boolean
+  id: string;
+  fullname: string;
+  email: string;
+  isLogin: boolean
 }
 type formRegister = {
   email: string,
@@ -242,7 +244,7 @@ function AuthPage({ }: Props) {
     }
 
   }
-  const isNullFormElement = (form:any): boolean => {
+  const isNullFormElement = (form: any): boolean => {
     if (error.email.length > 0 || error.username.length > 0 || error.password.length > 0 || error.repassword.length > 0) {
       return true
     }
@@ -258,18 +260,51 @@ function AuthPage({ }: Props) {
 
     return false
   }
-  const handleLogin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleLogin = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    if(isNullFormElement(formLogin)){
+    if (isNullFormElement(formLogin)) {
       return
     }
-
+    const login = async () => {
+      const apiUrl = import.meta.env.VITE_API_URL
+      axios.post(`${apiUrl}/auth/login`, formLogin, { withCredentials: true })
+        .then(res => {
+          showMessage(res.data.status, res.data.status ? "Đăng nhập thành công" : "Đăng nhập thất bại")
+          if (res.data.role === "admin") {
+            // Redirect to admin dashboard
+          } else {
+            window.location.href = "/"
+          }
+        })
+        .catch(err => {
+          showMessage(false, err.response.data.error || "Đăng nhập thất bại")
+        })
+    }
+    await login()
   }
   const handleRegister = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     if (isNullFormElement(formRegister)) {
       return
     }
+    const apiUrl = import.meta.env.VITE_API_URL
+    axios.post(`${apiUrl}/auth/register`, formRegister, { withCredentials: true })
+      .then(res => {
+        showMessage(res.data.status, res.data.status ? "Đăng ký thành công" : "Đăng ký thất bại")
+          setMode("")
+                setTimeout(() => {
+                  setFormRegister({
+                    email: "",
+                    username: "",
+                    password: "",
+                    repassword: ""
+                  })
+                  handleCleanState()
+                }, 1000)
+      })
+      .catch(err => {
+        showMessage(false, err.response.data.error || "Đăng ký thất bại")
+      })
 
   }
   return (
@@ -307,7 +342,7 @@ function AuthPage({ }: Props) {
               </i>
             </div>
             <p className={`${error.password.length > 0 ? "message-error" : ""}`}>{error.password}</p>
-            <button  className="btn" onClick={e=>handleLogin(e)}>Đăng nhập</button>
+            <button className="btn" onClick={e => handleLogin(e)}>Đăng nhập</button>
             <p className="social-text">Hoặc đăng nhập bằng những cách sau</p>
             <div className="social-media">
               <a href="#" className="social-icon"><FontAwesomeIcon icon={faFacebook} /></a>
@@ -433,6 +468,7 @@ function AuthPage({ }: Props) {
           <img src="/public/sign-up.svg" className="image" alt="login-image"></img>
         </div>
       </div>
+
     </div>
   )
 }

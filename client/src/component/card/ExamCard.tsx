@@ -13,7 +13,7 @@ type ExamCardProp = {
 function ExamCard({ exam,index=0 }: ExamCardProp) {
   const navigate = useNavigate()
   const handleClick = ()=>{
-    navigate(`/exams/${exam.id}`,{state:{exam:exam}})
+    navigate(`/exams/${exam._id}`,{state:{exam:exam}})
     window.scrollTo(0,0)
   }
 

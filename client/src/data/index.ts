@@ -782,8 +782,8 @@ export const results: Exam_Result={
   exam: exams[0],
   submit_time: 12,
   score: 1.4,
-  accurary_percentage: 28, // phan tram dung
-  error_percentage: 72,// phan tram sai
+  accurary_percentage: 28,
+  error_percentage: 72,
   total_content: 7,
   result_detail: [
     {

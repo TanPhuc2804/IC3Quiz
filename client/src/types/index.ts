@@ -1,6 +1,7 @@
 import type { QuestionType } from "./enums";
 
 export interface User {
+    _id?: string,
     id: number,
     username: string,
     fullname: string,
@@ -13,6 +14,7 @@ export interface User {
 }
 
 export interface Exam {
+    _id?: string,
     id: number,
     content: string,
     description: string,
@@ -39,13 +41,13 @@ export interface Question {
 }
 
 export interface MatchQuestion {
-    id:number,
+    id: number,
     term: string,
     definition: string,
 }
 
 export interface ClassificationQuestion {
-    id:number,
+    id: number,
     content: string,
     classify: string,
 }
@@ -56,6 +58,7 @@ export interface Mutiple_Question {
 }
 
 export interface Exam_Result {
+    _id?: string,
     user_id: number,
     exam: Exam,
     submit_time: number,
@@ -63,7 +66,7 @@ export interface Exam_Result {
     accurary_percentage: number, // phan tram dung
     error_percentage: number,// phan tram sai
     total_content: number,
-    result_detail:ResultsType[]
+    result_detail: ResultsType[]
 }
 
 export interface Category {
@@ -72,31 +75,31 @@ export interface Category {
     image_url: string
 }
 
-export type ResultsType={
-    question_id:number,
-    question_type:string,
-    question:number,
-    user_answer?:ResultQuestionType|ResultQuestionType[] 
+export type ResultsType = {
+    question_id: number,
+    question_type: string,
+    question: number,
+    user_answer?: ResultQuestionType | ResultQuestionType[]
 }
 
 export type ResultQuestionType = {
-    id_classify?:number
+    id_classify?: number
     isCorrect: boolean,
     choice: any,
     anwser_correct?: any
 }
 
-export type QuestionTableType= {
-    id:number,
-    question:number,
-    is_correct:boolean
+export type QuestionTableType = {
+    id: number,
+    question: number,
+    is_correct: boolean
 }
 
 export type TableResult = {
-    question_type:Question["question_type"],
-    correct_total:number,
-    incorrect_total:number,
-    overlook_total:number,
-    accurary_percentage:number,
-    questions:QuestionTableType[]
+    question_type: Question["question_type"],
+    correct_total: number,
+    incorrect_total: number,
+    overlook_total: number,
+    accurary_percentage: number,
+    questions: QuestionTableType[]
 }

@@ -1,24 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
+import { useParams } from "react-router-dom";
 import type { Exam as ExamType } from '../../../types'
 import ButtonDefauld from '../../../component/button/ButtonDefauld'
 import ExamDetailCard from '../../../component/card/ExamDetailCard'
 import { motion } from "framer-motion"
+import axios from 'axios'
 function ExamDetail() {
     const [exam, setExam] = useState<ExamType>()
+    const params = useParams()
     const navigate = useNavigate()
     const location = useLocation()
     useEffect(() => {
         const { exam } = location.state
         if (!exam) {
-            //fetch data from server
+
+            console.log(params)
+            const apiUrl = import.meta.env.VITE_API_URL
+            const fetchExam = async () => {
+                const response = await axios.get(`${apiUrl}/exams/${params.id}`)
+
+                setExam(response.data)
+            }
+            fetchExam()
         }
-        // fake data
         setExam(exam)
     }, [])
 
-    const handlePracticeExam = (mode:string) => {
-        navigate(`practice`, { state: { exam, mode:mode } })
+    const handlePracticeExam = (mode: string) => {
+        navigate(`practice`, { state: { exam, mode: mode } })
     }
 
     return (
@@ -62,7 +72,7 @@ function ExamDetail() {
                         text_color="white"
                         border_color="white"
                         haveMotion={true}
-                        onClick={()=>{handlePracticeExam("training")}}
+                        onClick={() => { handlePracticeExam("training") }}
                     />
                     <ButtonDefauld
                         height="50px"
@@ -72,7 +82,7 @@ function ExamDetail() {
                         text_color="white"
                         border_color="white"
                         haveMotion={true}
-                        onClick={()=>{handlePracticeExam("test")}}
+                        onClick={() => { handlePracticeExam("test") }}
                     />
                 </motion.div>
 
