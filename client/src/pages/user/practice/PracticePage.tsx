@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from "react-router-dom";
-import type { Question, Exam as ExamType, ResultQuestionType, ResultsType } from '../../../types'
+import type { Question, Exam as ExamType, ResultQuestionType, ResultsType, ErrorResponse } from '../../../types'
 import { useLocation } from 'react-router'
 import TestNavigation from '../../../component/layouts/sections/exam-test/TestNavigation'
 import QuestionComponent from '../../../component/card/Question'
@@ -10,6 +10,7 @@ import { ModeEnum } from '../../../types/enums'
 import axios from 'axios';
 import { motion, AnimatePresence } from "framer-motion";
 import Loading from '../../../component/loading/Loading';
+import ModalNotification from '../../../component/modal/ModalNotification';
 
 type QuestionFilter = {
     id: number,
@@ -24,6 +25,10 @@ type CountQuestionType = {
 function PracticePage() {
     // loading
     const [loading, setLoading] = useState<boolean>(true);
+
+    // handle error 
+    const [responseErr, setResponseErr] = useState<ErrorResponse | null>(null)
+
     //state management
     const [exam, setExam] = useState<ExamType>()
     const [mode, setMode] = useState<string>("")
@@ -43,9 +48,9 @@ function PracticePage() {
             try {
                 setLoading(true)
                 const apiUrl = import.meta.env.VITE_API_URL;
-                const questionRes = await axios.get(`${apiUrl}/questions/${params.id}`);
+                const questionRes = await axios.get(`${apiUrl}/questions/${params.id}`, { withCredentials: true });
                 const questionData = questionRes.data;
-
+                console.log(questionRes);
                 if (!questionData || questionData.length === 0) {
                     setQuestions([]);
                 } else {
@@ -54,6 +59,12 @@ function PracticePage() {
                     setQuestions(questionData);
                 }
             } catch (error) {
+                if (axios.isAxiosError(error)) {
+                    setResponseErr({
+                        ...(error?.response?.data ?? {}),
+                        statusCode: error?.status ?? 500
+                    });
+                }
                 console.error("Error fetching questions:", error);
             } finally {
                 setTimeout(() => {
@@ -103,7 +114,7 @@ function PracticePage() {
         }
 
     }
-
+    console.log(questions)
     if (loading)
         return (
             <motion.div
@@ -197,6 +208,23 @@ function PracticePage() {
                     )}
                 </AnimatePresence>
             </ItemQuestionContext.Provider>
+            <ModalNotification
+                isModalOpen={responseErr ? true : false}
+                handleOk={() => { 
+                    if(responseErr?.statusCode === 401){
+                        window.location.href = '/login';
+                    } else {
+                        window.location.href = '/';
+                    }
+                }}
+                handleCancel={() => {
+                    setResponseErr(null);
+                    window.location.href = '/';
+                 }}
+                error={responseErr} 
+                okText={responseErr?.statusCode === 401 ? "Đăng nhập" : "Quay lại trang chủ"}
+                cancelText="Hủy"
+                />
         </QuestionContext.Provider>
     );
 }

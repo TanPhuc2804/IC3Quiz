@@ -103,3 +103,19 @@ export type TableResult = {
     accurary_percentage: number,
     questions: QuestionTableType[]
 }
+
+
+export interface Package {
+    _id: string,
+    name: string,
+    description: string,
+    price: number,
+    duration: number, // in days
+    benefits: string[],
+}
+// error response from backend
+export interface ErrorResponse {
+    success: boolean,
+    error: string,
+    statusCode?: number
+}

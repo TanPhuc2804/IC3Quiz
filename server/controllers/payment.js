@@ -22,6 +22,10 @@ const vnpay = new VNPay({
 const getUrlPayment = expressAsyncHandler(async (req, res) => {
     const idOrder = generateOrderId();
     const { amount, package_id } = req.body;
+
+    if (!amount || !package_id) {
+        throw new AppError("Thiếu thông tin thanh toán", 400)
+    }
     const ipAddr =
         req.headers["x-forwarded-for"]?.split(",")[0] ||
         req.socket.remoteAddress?.replace("::1", "127.0.0.1") ||
@@ -39,7 +43,7 @@ const getUrlPayment = expressAsyncHandler(async (req, res) => {
         vnp_OrderType: "other",
         vnp_CurrCode: "VND",
     });
-    res.json({ url });
+    res.status(200).json({ payment_url: url });
 });
 const vnpayReturn = expressAsyncHandler(async (req, res) => {
     const userId = req.user.id;
@@ -52,8 +56,6 @@ const vnpayReturn = expressAsyncHandler(async (req, res) => {
     if (vnp_ResponseCode === "00") {
         const packageId = vnp_OrderInfo.split(" ")[3]
         const package = await packageMopdel.findById(packageId)
-        console.log(package)
-        console.log(package.duration + "ngay");
         const date = moment(vnp_PayDate, "YYYYMMDDHHmmss").toDate();
         const exprie_date = moment(date).add(package.duration, "days").toDate()
         if (!package) {
@@ -64,9 +66,8 @@ const vnpayReturn = expressAsyncHandler(async (req, res) => {
             register_date: date,
             expire_date: exprie_date
         }
-        const status = moment().isBefore(exprie_date) ? "active" : "expired"
         const updateUser = await userModel.findByIdAndUpdate(userId, {
-            $set: { status: status, package: userPackge },
+            $set: { status: "paid", package: userPackge },
         }, { new: true })
         await updateUser.save()
 

@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema(
     },
     status : {
       type: String,
-      enum: ['active', 'expired', 'none'],
+      enum: ['active', 'expired', 'none',"paid"],
       required: true,
       lowercase: true,
       trim: true,

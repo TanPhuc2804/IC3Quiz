@@ -38,4 +38,14 @@ const getExamResultDetail = expressAsyncHandler(async (req, res) => {
     res.json(result);
 });
 
-module.exports = { getUserExamResults, saveResultExam, getExamResultDetail }
+
+const changeStatusUser = expressAsyncHandler(async (req, res) => {
+    const { userId } = req.body
+    const status = "active" 
+    const updateUser = await userModel.findByIdAndUpdate(userId, {
+        $set: { status: status },
+    }, { new: true })
+    await updateUser.save()
+    res.status(201).json({message:"Phê duyệt thành công !"})
+})
+module.exports = { getUserExamResults, saveResultExam, getExamResultDetail, changeStatusUser }
