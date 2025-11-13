@@ -33,12 +33,10 @@ const examQuestionSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Exam',
-        required: true,
       },
     ],
     id: {
-      type: Number,
-      required: true,
+      type: Number, 
       unique: true,
     },
     content: {
@@ -48,11 +46,10 @@ const examQuestionSchema = new mongoose.Schema(
     },
     question: {
       type: Number,
-      required: true,
     },
     question_type: {
       type: String,
-      enum: ['normal', 'match', 'multiple', 'classify'],
+      enum: ['normal', 'drop_match', 'multiple', 'classify'],
       required: true,
     },
     option: {
@@ -83,12 +80,11 @@ const examQuestionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-examQuestionSchema.pre('save', async function (next) {
-  if (this.isNew && !this.id) {
-    this.id = await getNextSequence('question_id');
-  }
-  next();
-});
-
+// examQuestionSchema.pre('save', async function (next) {
+//   if (this.isNew && !this.id) {
+//     this.id = await getNextSequence('question_id');
+//   }
+//   next();
+// });
 
 module.exports = mongoose.model('Question', examQuestionSchema, 'Question');

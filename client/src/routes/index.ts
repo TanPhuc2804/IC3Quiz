@@ -1,6 +1,10 @@
 import MatchQuestinComponent from "../component/quiz/MatchQuestinComponent"
 import Home from "../pages/Home"
 import PaymentResult from "../pages/PaymentResult"
+import AdminPage from "../pages/admin"
+import Exam from "../pages/admin/Exam"
+import Question from "../pages/admin/Question"
+import User from "../pages/admin/User"
 import AuthPage from "../pages/auth/AuthPage"
 import ExamDetail from "../pages/user/exam/ExamDetail"
 import ExamPage from "../pages/user/exam/ExamPage"
@@ -21,5 +25,15 @@ export const publicRoutes = [
 
 
 export const privateRoutes = [
-
+    {
+        path: "/admin",
+        component: AdminPage,
+        isAdmin: true,
+        children: [
+            { path: "user", page: User },
+            { path: "exam", page: Exam },
+            { path: "question", page: Question },
+            { path: "account", page: Question },
+        ]
+    }
 ]

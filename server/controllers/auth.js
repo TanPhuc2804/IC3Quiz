@@ -27,7 +27,9 @@ const login = asyncHandler(async (req, res, next) => {
         return next(new AppError('Username hoặc mật khẩu không đúng !', 401));
     }
     const token = generateToken({ id: user._id, fullname: user.fullname, role: user.role, email: user.email});
-    res.cookie("token", token, { httpOnly: true, secure: true, maxAge: 60 * 60 * 1000, sameSite: true }).status(200).json({ status: true, token, role: user.role });
+   // res.cookie("token", token, { httpOnly: true, secure: true, maxAge: 60 * 60 * 1000, sameSite: true }).status(200).json({ status: true, token, role: user.role });
+   
+    res.cookie("token", token, { httpOnly: true, secure: true, sameSite: true }).status(200).json({ status: true, token, role: user.role });
 });
 
 module.exports = { register, login };

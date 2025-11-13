@@ -55,7 +55,6 @@ function ExamResult() {
         fetchData()
 
     }, [])
-    console.log(examResult)
     const getAnwser = (userAnwser: ResultQuestionType | ResultQuestionType[]) => {
         if (Array.isArray(userAnwser)) {
             return userAnwser.map((answer, index) => (

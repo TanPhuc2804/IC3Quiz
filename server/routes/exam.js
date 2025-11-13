@@ -6,4 +6,5 @@ const router = express.Router();
 
 router.get("/", getAllExam);
 router.get("/:id",getById)
+
 module.exports = router;

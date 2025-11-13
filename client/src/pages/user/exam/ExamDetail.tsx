@@ -1,16 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 import { useParams } from "react-router-dom";
-import type { Exam as ExamType } from '../../../types'
+import type { Exam_Result, Exam as ExamType } from '../../../types'
 import ButtonDefauld from '../../../component/button/ButtonDefauld'
 import ExamDetailCard from '../../../component/card/ExamDetailCard'
 import { motion } from "framer-motion"
 import axios from 'axios'
+import ResultExamCard from '../../../component/card/ResultExamCard';
 function ExamDetail() {
     const [exam, setExam] = useState<ExamType>()
     const params = useParams()
     const navigate = useNavigate()
     const location = useLocation()
+
+    const [result, setResult] = useState<Exam_Result[]>([])
+
+    useEffect(() => {
+        const apiUrl = import.meta.env.VITE_API_URL
+        axios.get(`${apiUrl}/users/result-detail/${exam?._id}`, { withCredentials: true })
+            .then(res => res.data)
+            .then(data => {
+                setResult(data)
+            })
+    }, [exam?._id])
     useEffect(() => {
         const { exam } = location.state
         if (!exam) {
@@ -19,7 +31,6 @@ function ExamDetail() {
             const apiUrl = import.meta.env.VITE_API_URL
             const fetchExam = async () => {
                 const response = await axios.get(`${apiUrl}/exams/${params.id}`)
-
                 setExam(response.data)
             }
             fetchExam()
@@ -95,6 +106,15 @@ function ExamDetail() {
                 >
                     <ExamDetailCard exam={exam} />
                 </motion.div>
+                {
+                    result.length > 0 &&
+                    <div className='mt-[60px] w-[800px] text-[20px] shadow-2xl border-2 rounded-[10px] border-gray-100 p-[20px] '>
+                        <h3 className='font-bold text-[25px] mb-[20px]'>Danh sách kết quả</h3>
+
+                        <ResultExamCard resultsData={result} />
+                    </div>
+                }
+
             </div>
         </div>
     );

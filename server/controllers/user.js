@@ -13,6 +13,15 @@ const getUserExamResults = expressAsyncHandler(async (req, res) => {
     res.json(results);
 });
 
+const getExamResultDetailByUser = expressAsyncHandler(async (req, res) => {
+    const userId = req.user.id
+    const { resultId } = req.params;
+    const result = await examResult.find({ exam: resultId, user_id: userId });
+    if (!result) {
+        throw new AppError("Exam result not found", 404);
+    }
+    res.json(result);
+});
 
 const saveResultExam = expressAsyncHandler(async (req, res) => {
     const idUser = req.user.id
@@ -41,11 +50,17 @@ const getExamResultDetail = expressAsyncHandler(async (req, res) => {
 
 const changeStatusUser = expressAsyncHandler(async (req, res) => {
     const { userId } = req.body
-    const status = "active" 
+    const status = "active"
     const updateUser = await userModel.findByIdAndUpdate(userId, {
         $set: { status: status },
     }, { new: true })
     await updateUser.save()
-    res.status(201).json({message:"Phê duyệt thành công !"})
+    res.status(201).json({ message: "Phê duyệt thành công !" })
 })
-module.exports = { getUserExamResults, saveResultExam, getExamResultDetail, changeStatusUser }
+
+const getAllUsers = expressAsyncHandler(async (req, res) => {
+    const users = await userModel.find({}).populate("package.package_id")
+    res.status(200).json({ users })
+});
+
+module.exports = { getUserExamResults, saveResultExam, getExamResultDetail, changeStatusUser, getAllUsers,getExamResultDetailByUser }

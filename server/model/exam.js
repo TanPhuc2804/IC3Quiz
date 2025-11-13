@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const getNextSequence = require('../services/getNextSequence');
 
 const examSchema = new mongoose.Schema(
   {
@@ -40,4 +41,25 @@ const examSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Exam', examSchema,"Exam");
+examSchema.pre('validate', async function (next) {
+  try {
+    if (this.isNew && !this.id) {
+      this.id = await getNextSequence('exam_id', { preview: true });
+    }
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
+// 2️⃣ Sau khi lưu thành công mới tăng thật counter
+examSchema.post('save', async function (doc, next) {
+  try {
+    await getNextSequence('exam_id'); // tăng thật sau khi lưu thành công
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
+module.exports = mongoose.model('Exam', examSchema, "Exam");

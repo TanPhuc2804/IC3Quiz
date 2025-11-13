@@ -11,7 +11,7 @@ export interface User {
 
 interface AuthContextType {
   user: User | null;
-  setAuth: (data: User) => void;
+  setAuth: (data: User |null) => void;
   logout: () => void;
 }
 
@@ -27,9 +27,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   }, []);
 
-  const setAuth = (data: User) => {
+  const setAuth = (data: User | null) => {
     setUser(data);
-    localStorage.setItem("authUser", JSON.stringify(data));
+    if (data) {
+      localStorage.setItem("authUser", JSON.stringify(data));
+    } else {
+      localStorage.removeItem("authUser");
+    }
   };
 
   const logout = () => {

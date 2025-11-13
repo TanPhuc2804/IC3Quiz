@@ -135,121 +135,121 @@ export const questions: Question[] = [
       }
     ]
   },
-  // {
-  //   "id": 4,
-  //   "content": "Em hãy cho biết, hạn chế của máy tính bảng so với máy tính xách tay là gì?",
-  //   "question": 4,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Không thể thực hiện cuộc gọi Video.",
-  //     "B. Không thể chỉnh sửa tài liệu.",
-  //     "C. Một số ứng dụng sẽ không cài đặt được trên máy tính bảng.",
-  //     "D. Không thể chỉnh sửa tài liệu"
-  //   ],
-  //   "correct_answer": "C"
-  // },
-  // {
-  //   "id": 5,
-  //   "content": "Em hãy cho biết, loại kết nối nào để kết nối tai nghe không dây với máy tính xách tay?",
-  //   "question": 5,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. HDMI",
-  //     "B. Intranet",
-  //     "C. USB",
-  //     "D. Bluetooth"
-  //   ],
-  //   "correct_answer": "D"
-  // },
-  // {
-  //   "id": 6,
-  //   "content": "Em hãy cho biết, tùy chọn nào sau đây là một thiết bị đầu vào (Input Device)?",
-  //   "question": 6,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Loa (Speakers)",
-  //     "B. Máy chiếu (Projector)",
-  //     "C. Máy in (Printer)",
-  //     "D. Micro"
-  //   ],
-  //   "correct_answer": "D"
-  // },
-  // {
-  //   "id": 7,
-  //   "content": "Em hãy cho biết, tùy chọn nào sau đây là lợi thế của việc sử dụng USB để lưu trữ các tập tin so với lưu trữ điện toán đám mây? (Chọn 2)",
-  //   "question": 7,
-  //   "question_type": "multiple",
-  //   "limit_choice": 2,
-  //   "multiple_question": [
-  //     {
-  //       "option_text": "A. USB có thể chứa nhiều dữ liệu hơn.",
-  //       "is_correct": false
-  //     },
-  //     {
-  //       "option_text": "B. USB không an toàn hơn so với lưu trữ đám mây.",
-  //       "is_correct": true
-  //     },
-  //     {
-  //       "option_text": "C. Các tệp tin của em an toàn hơn.",
-  //       "is_correct": true
-  //     },
-  //     {
-  //       "option_text": "D. USB không có giới hạn dung lượng.",
-  //       "is_correct": false
-  //     }
-  //   ]
-  // },
-  // {
-  //   "id": 8,
-  //   "content": "Em hãy cho biết, tùy chọn nào sau đây là một lợi thế lớn của máy tính bảng?",
-  //   "question": 8,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Sức mạnh",
-  //     "B. Tính di động",
-  //     "C. Bộ nhớ",
-  //     "D. Khả năng lưu trữ"
-  //   ],
-  //   "correct_answer": "B"
-  // },
-  // {
-  //   "id": 9,
-  //   "content": "Em hãy cho biết, loại giao tiếp nào sau đây cho phép hai thiết bị giao tiếp bằng cách đặt chúng cách nhau trong vòng 2 inch?",
-  //   "question": 9,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. NFC (Near Field Communication)",
-  //     "B. Wifi",
-  //     "C. Bluetooth",
-  //     "D. Ethernet"
-  //   ],
-  //   "correct_answer": "A"
-  // },
-  // {
-  //   "id": 10,
-  //   "content": "Em hãy cho biết, những thiết bị nào sau đây phụ thuộc nhiều vào công nghệ lưu trữ điện toán đám mây? (Chọn 2)",
-  //   "question": 10,
-  //   "question_type": "multiple",
-  //   "limit_choice": 2,
-  //   "multiple_question": [
-  //     {
-  //       "option_text": "A. Laptop",
-  //       "is_correct": false
-  //     },
-  //     {
-  //       "option_text": "B. Desktop",
-  //       "is_correct": false
-  //     },
-  //     {
-  //       "option_text": "C. Smartphone",
-  //       "is_correct": true
-  //     },
-  //     {
-  //       "option_text": "G. Smartphone",
-  //       "is_correct": true
-  //     }
-  //   ]
-  // },
+  {
+    "id": 4,
+    "content": "Em hãy cho biết, hạn chế của máy tính bảng so với máy tính xách tay là gì?",
+    "question": 4,
+    "question_type": "normal",
+    "option": [
+      "A. Không thể thực hiện cuộc gọi Video.",
+      "B. Không thể chỉnh sửa tài liệu.",
+      "C. Một số ứng dụng sẽ không cài đặt được trên máy tính bảng.",
+      "D. Không thể chỉnh sửa tài liệu"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "id": 5,
+    "content": "Em hãy cho biết, loại kết nối nào để kết nối tai nghe không dây với máy tính xách tay?",
+    "question": 5,
+    "question_type": "normal",
+    "option": [
+      "A. HDMI",
+      "B. Intranet",
+      "C. USB",
+      "D. Bluetooth"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id": 6,
+    "content": "Em hãy cho biết, tùy chọn nào sau đây là một thiết bị đầu vào (Input Device)?",
+    "question": 6,
+    "question_type": "normal",
+    "option": [
+      "A. Loa (Speakers)",
+      "B. Máy chiếu (Projector)",
+      "C. Máy in (Printer)",
+      "D. Micro"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id": 7,
+    "content": "Em hãy cho biết, tùy chọn nào sau đây là lợi thế của việc sử dụng USB để lưu trữ các tập tin so với lưu trữ điện toán đám mây? (Chọn 2)",
+    "question": 7,
+    "question_type": "multiple",
+    "limit_choice": 2,
+    "multiple_question": [
+      {
+        "option_text": "A. USB có thể chứa nhiều dữ liệu hơn.",
+        "is_correct": false
+      },
+      {
+        "option_text": "B. USB không an toàn hơn so với lưu trữ đám mây.",
+        "is_correct": true
+      },
+      {
+        "option_text": "C. Các tệp tin của em an toàn hơn.",
+        "is_correct": true
+      },
+      {
+        "option_text": "D. USB không có giới hạn dung lượng.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "content": "Em hãy cho biết, tùy chọn nào sau đây là một lợi thế lớn của máy tính bảng?",
+    "question": 8,
+    "question_type": "normal",
+    "option": [
+      "A. Sức mạnh",
+      "B. Tính di động",
+      "C. Bộ nhớ",
+      "D. Khả năng lưu trữ"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id": 9,
+    "content": "Em hãy cho biết, loại giao tiếp nào sau đây cho phép hai thiết bị giao tiếp bằng cách đặt chúng cách nhau trong vòng 2 inch?",
+    "question": 9,
+    "question_type": "normal",
+    "option": [
+      "A. NFC (Near Field Communication)",
+      "B. Wifi",
+      "C. Bluetooth",
+      "D. Ethernet"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id": 10,
+    "content": "Em hãy cho biết, những thiết bị nào sau đây phụ thuộc nhiều vào công nghệ lưu trữ điện toán đám mây? (Chọn 2)",
+    "question": 10,
+    "question_type": "multiple",
+    "limit_choice": 2,
+    "multiple_question": [
+      {
+        "option_text": "A. Laptop",
+        "is_correct": false
+      },
+      {
+        "option_text": "B. Desktop",
+        "is_correct": false
+      },
+      {
+        "option_text": "C. Smartphone",
+        "is_correct": true
+      },
+      {
+        "option_text": "G. Smartphone",
+        "is_correct": true
+      }
+    ]
+  },
   {
     "id": 11,
     "content": "Em hãy cho biết, tùy chọn nào sau đây là những thiết bị có thể được ghép nối không dây với máy tính? (Chọn 4)",
@@ -333,401 +333,401 @@ export const questions: Question[] = [
     ],
     "correct_answer": "B"
   },
-  // {
-  //   "id": 14,
-  //   "content": "Em hãy cho biết, loại phần mềm hệ thống nào quản lí tất cả các phần mềm và phần cứng trên máy tính?",
-  //   "question": 14,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Hệ điều hành (OS)",
-  //     "B. Phần mềm chống Virus",
-  //     "C. Phần mềm tiện ích (Utility)",
-  //     "D. Trình điều khiển thiết bị (Driver)"
-  //   ],
-  //   "correct_answer": "A"
-  // },
-  // {
-  //   "id": 15,
-  //   "content": "Trong các tùy chọn sau, tùy chọn nào là các thiết bị đầu ra (Output Device)? (Chọn 3)",
-  //   "question": 15,
-  //   "question_type": "multiple",
-  //   "limit_choice": 3,
-  //   "multiple_question": [
-  //     {
-  //       "option_text": "A. Máy in (Printer)",
-  //       "is_correct": true
-  //     },
-  //     {
-  //       "option_text": "B. Tai nghe (Headphone)",
-  //       "is_correct": true
-  //     },
-  //     {
-  //       "option_text": "C. Loa (Speaker)",
-  //       "is_correct": true
-  //     },
-  //     {
-  //       "option_text": "D. Bàn di chuột cảm ứng (Touchpad)",
-  //       "is_correct": false
-  //     },
-  //     {
-  //       "option_text": "E. Chuột (Mouse)",
-  //       "is_correct": false
-  //     },
-  //     {
-  //       "option_text": "F. Bàn phím (Keyboard)",
-  //       "is_correct": false
-  //     }
-  //   ]
-  // },
-  // {
-  //   "id": 16,
-  //   "content": "Em hãy cho biết, tùy chọn nào dưới đây là thuật ngữ chỉ kết quả mà máy tính tạo ra, chẳng hạn như thông tin, âm thanh và hình ảnh?",
-  //   "question": 16,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Đầu ra (Output)",
-  //     "B. Ổ cứng (Hard Drive)",
-  //     "C. Bộ nhớ (Memory)",
-  //     "D. Hệ điều hành (OS)"
-  //   ],
-  //   "correct_answer": "A"
-  // },
-  // {
-  //   "id": 17,
-  //   "content": "Em hãy cho biết, tùy chọn nào sau đây là thiết bị có vai trò lưu trữ thông tin cho hệ điều hành, phần mềm và phần cứng?",
-  //   "question": 17,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Bộ nguồn",
-  //     "B. Màn hình",
-  //     "C. Card âm thanh",
-  //     "D. Bộ nhớ"
-  //   ],
-  //   "correct_answer": "D"
-  // },
-  // {
-  //   "id": 18,
-  //   "content": "Em hãy cho biết, tùy chọn nào dưới đây hỗ trợ chức năng cơ bản và điều khiển các phần khác nhau của máy tính?",
-  //   "question": 18,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Dữ liệu (Data)",
-  //     "B. Đầu vào (Input)",
-  //     "C. Đầu vào (Input)",
-  //     "D. Hệ điều hành (OS)"
-  //   ],
-  //   "correct_answer": "D"
-  // },
-  // {
-  //   "id": 19,
-  //   "content": "Hành động nỗ lực khai thác hệ thống máy tính hoặc mạng riêng bên trong máy tính được gọi là gì?",
-  //   "question": 19,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Bystander",
-  //     "B. Hacking",
-  //     "C. Dấu chân kĩ thuật số (Digital Footprint)",
-  //     "D. Công dân kỉ nguyên số (Digital Citizenship)"
-  //   ],
-  //   "correct_answer": "B"
-  // },
-  // {
-  //   "id": 20,
-  //   "content": "Hầu hết các điện thoại thông minh đều có tùy chọn gói dữ liệu di động. Em hãy cho biết, tùy chọn nào sau đây mô tả chính xác dữ liệu di động là gì?",
-  //   "question": 20,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Điện thoại của em có bao nhiêu bộ nhớ.",
-  //     "B. Truy cập Internet không dây có tính phí, được đo bằng mức tiêu thụ dữ liệu.",
-  //     "C. Em được phép gửi bao nhiêu tin nhắn văn bản",
-  //     "D. Em được phân bổ bao nhiêu thời gian để gọi điện thoại."
-  //   ],
-  //   "correct_answer": "B"
-  // },
-  // {
-  //   "id": 21,
-  //   "content": "Em hãy cho biết, hai lợi ích của việc tải xuống (Download) tập tin thay vì phát trực tuyến (Stream) tập tin đó là gì? (Chọn 2)",
-  //   "question": 21,
-  //   "question_type": "multiple",
-  //   "limit_choice": 2,
-  //   "multiple_question": [
-  //     {
-  //       "option_text": "A. Sau khi tải xuống hoàn tất, quá trình phát lại đáng tin cậy hơn.",
-  //       "is_correct": true
-  //     },
-  //     {
-  //       "option_text": "B. Phát trực tuyến có khả năng phát lại mượt mà hơn.",
-  //       "is_correct": false
-  //     },
-  //     {
-  //       "option_text": "C. Không yêu cầu dung lượng lưu trữ.",
-  //       "is_correct": false
-  //     },
-  //     {
-  //       "option_text": "D. Tệp tin đã được tải xuống không yêu cầu kết nối Internet để phát lại.",
-  //       "is_correct": true
-  //     },
-  //     {
-  //       "option_text": "E. Không cần phát đạt trước khi chạy tệp tin.",
-  //       "is_correct": false
-  //     }
-  //   ]
-  // },
-  // {
-  //   "id": 22,
-  //   "content": "Tùy chọn nào dưới đây có thể được sử dụng để truyền dữ liệu không dây giữa hai thiết bị gần nhau?",
-  //   "question": 22,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Ethernet",
-  //     "B. Bluetooth",
-  //     "C. Firewall",
-  //     "D. Modem"
-  //   ],
-  //   "correct_answer": "B"
-  // },
-  // {
-  //   "id": 23,
-  //   "content": "Thiết bị nào KHÔNG có Camera?",
-  //   "question": 23,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Google Chromebook",
-  //     "B. Chuông cửa thông minh (Smart Doorbell)",
-  //     "C. Tai nghe Bluetooth (Bluetooth Headset)",
-  //     "D. Apple Iphone"
-  //   ],
-  //   "correct_answer": "C"
-  // },
-  // {
-  //   "id": 24,
-  //   "content": "Thiết bị nào trong số này là thiết bị nhập (Input Device)?",
-  //   "question": 24,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Monitor",
-  //     "B. Printer",
-  //     "C. Keyboard",
-  //     "D. Speaker"
-  //   ],
-  //   "correct_answer": "C"
-  // },
-  // {
-  //   "id": 25,
-  //   "content": "Em hãy cho biết thiết bị lưu trữ được đo lường bằng đơn vị nào sau đây? (Chọn 2)",
-  //   "question": 25,
-  //   "question_type": "multiple",
-  //   "limit_choice": 2,
-  //   "multiple_question": [
-  //     {
-  //       "option_text": "A. Terabytes",
-  //       "is_correct": true
-  //     },
-  //     {
-  //       "option_text": "B. Centimeters",
-  //       "is_correct": false
-  //     },
-  //     {
-  //       "option_text": "C. Inches",
-  //       "is_correct": false
-  //     },
-  //     {
-  //       "option_text": "D. Feet",
-  //       "is_correct": false
-  //     },
-  //     {
-  //       "option_text": "E. Gigabytes",
-  //       "is_correct": true
-  //     }
-  //   ]
-  // },
-  // {
-  //   "id": 26,
-  //   "content": "Em hãy cho biết, loại kết nối không dây nào sau đây sẽ cho phép em tải hình ảnh từ máy ảnh vào máy tính?",
-  //   "question": 26,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. VGA",
-  //     "B. HDMI",
-  //     "C. Bluetooth",
-  //     "D. RCA"
-  //   ],
-  //   "correct_answer": "C"
-  // },
-  // {
-  //   "id": 27,
-  //   "content": "Em hãy cho biết, thiết bị chuột trên máy tính bảng đã được thay thế bằng những tùy chọn nào đây? (Chọn 2)",
-  //   "question": 27,
-  //   "question_type": "multiple",
-  //   "limit_choice": 2,
-  //   "multiple_question": [
-  //     {
-  //       "option_text": "A. Bút chì (Pencil)",
-  //       "is_correct": false
-  //     },
-  //     {
-  //       "option_text": "B. Bút cảm ứng (Stylus)",
-  //       "is_correct": true
-  //     },
-  //     {
-  //       "option_text": "C. Màn hình cảm ứng (Touch Screen)",
-  //       "is_correct": true
-  //     }
-  //   ]
-  // },
-  // {
-  //   "id": 28,
-  //   "content": "Em hãy cho biết, tùy chọn nào sau đây là thành phần quan trọng nhất được sử dụng để chạy các ứng dụng?",
-  //   "question": 28,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Bộ lưu trữ",
-  //     "B. Thẻ sim",
-  //     "C. Card màn hình",
-  //     "D. Bộ nhớ"
-  //   ],
-  //   "correct_answer": "D"
-  // },
-  // {
-  //   "id": 29,
-  //   "content": "Các thiết bị di động có dung lượng bộ nhớ hạn chế so với máy tính để bàn. Em hãy cho biết, tùy chọn nào sau đây có khả năng làm cho thiết bị di động của em hết dung lượng bộ nhớ?",
-  //   "question": 29,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Sạc thiết bị di động trước khi hết pin.",
-  //     "B. Thường xuyên quên xóa bộ nhớ đệm",
-  //     "C. Truyền phát các video HD",
-  //     "D. Cài quá nhiều Game"
-  //   ],
-  //   "correct_answer": "D"
-  // },
-  // {
-  //   "id": 30,
-  //   "content": "Hệ điều hành (OS) là gì?",
-  //   "question": 30,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Phần mềm hỗ trợ các chức năng cơ bản của máy tính.",
-  //     "B. Một cái gì đó đi vào máy tính.",
-  //     "C. Thiết bị vật lý lưu trữ thông tin cho hệ điều hành, phần mềm và phần cứng.",
-  //     "D. Khu vực làm việc của màn hình máy tính."
-  //   ],
-  //   "correct_answer": "A"
-  // },
-  // {
-  //   "id": 31,
-  //   "content": "Em hãy cho biết, tùy chọn nào là phương pháp cho phép truy cập và cập nhật các tập tin trực tuyến?",
-  //   "question": 31,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Lưu trữ đám mây",
-  //     "B. Bộ lưu trữ USB",
-  //     "C. Ổ cứng ngoài",
-  //     "D. Email"
-  //   ],
-  //   "correct_answer": "A"
-  // },
-  // {
-  //   "id": 32,
-  //   "content": "Em hãy cho biết, tùy chọn nào sau đây là cách để tăng không gian lưu trữ cho điện thoại thông minh ? (Chọn 2)",
-  //   "question": 32,
-  //   "question_type": "multiple",
-  //   "limit_choice": 2,
-  //   "multiple_question": [
-  //     {
-  //       "option_text": "A. Thường xuyên xóa các ứng dụng.",
-  //       "is_correct": false
-  //     },
-  //     {
-  //       "option_text": "A. Gỡ cài đặt bất kì trò chơi nào mà em không chơi nữa.",
-  //       "is_correct": true
-  //     },
-  //     {
-  //       "option_text": "B. Truyền các tệp tin sang máy tính.",
-  //       "is_correct": true
-  //     },
-  //     {
-  //       "option_text": "C. Không chụp thêm nhiều ảnh và video.",
-  //       "is_correct": false
-  //     },
-  //     {
-  //       "option_text": "D. Gỡ tất cả các chương trình nền đang chạy.",
-  //       "is_correct": false
-  //     },
-  //     {
-  //       "option_text": "E. Xóa toàn bộ tin nhắn đã gửi.",
-  //       "is_correct": false
-  //     }
-  //   ]
-  // },
-  // {
-  //   "id": 33,
-  //   "content": "Địa chỉ của một trang Web được gọi là gì?",
-  //   "question": 33,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Tác giả (Author)",
-  //     "B. Tiêu đề trang (Page Title)",
-  //     "C. Nhà xuất bản (Publisher)",
-  //     "D. URL"
-  //   ],
-  //   "correct_answer": "D"
-  // },
-  // {
-  //   "id": 34,
-  //   "content": "Em hãy cho biết, tùy chọn nào là loại lưu trữ dữ liệu được truy cập từ xa thông qua kết nối Internet?",
-  //   "question": 34,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Lưu trữ đám mây",
-  //     "B. Đĩa CD",
-  //     "C. Bộ lưu trữ USB",
-  //     "D. Ổ cứng ngoài"
-  //   ],
-  //   "correct_answer": "A"
-  // },
-  // {
-  //   "id": 35,
-  //   "content": "Em gọi các thiết bị máy tính được kết nối với nhau có thể trao đổi dữ liệu và chia sẻ tài nguyên là gì?",
-  //   "question": 35,
-  //   "question_type": "normal",
-  //   "option": [
-  //     "A. Ethernet",
-  //     "B. Mạng máy tính (Computer Network)",
-  //     "C. Bluetooth",
-  //     "D. Bộ nhớ (Memory)"
-  //   ],
-  //   "correct_answer": "B"
-  // },
-  // {
-  //   "id": 36,
-  //   "content": "Em hãy cho biết, phần mềm Virus ảnh hưởng đến hệ thống máy tính như thế nào? (Chọn 2)",
-  //   "question": 36,
-  //   "question_type": "multiple",
-  //   "limit_choice": 2,
-  //   "multiple_question": [
-  //     {
-  //       "option_text": "A. Làm hỏng các tệp tin.",
-  //       "is_correct": true
-  //     },
-  //     {
-  //       "option_text": "B. Thu thập và chuyển thông tin cá nhân.",
-  //       "is_correct": true
-  //     },
-  //     {
-  //       "option_text": "C. Làm chậm hiệu suất của máy tính.",
-  //       "is_correct": true
-  //     },
-  //     {
-  //       "option_text": "D. Sửa chữa các tệp bị hỏng.",
-  //       "is_correct": false
-  //     },
-  //     {
-  //       "option_text": "E. Không cho phép máy tính khởi động.",
-  //       "is_correct": false
-  //     }
-  //   ]
-  // },
+  {
+    "id": 14,
+    "content": "Em hãy cho biết, loại phần mềm hệ thống nào quản lí tất cả các phần mềm và phần cứng trên máy tính?",
+    "question": 14,
+    "question_type": "normal",
+    "option": [
+      "A. Hệ điều hành (OS)",
+      "B. Phần mềm chống Virus",
+      "C. Phần mềm tiện ích (Utility)",
+      "D. Trình điều khiển thiết bị (Driver)"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id": 15,
+    "content": "Trong các tùy chọn sau, tùy chọn nào là các thiết bị đầu ra (Output Device)? (Chọn 3)",
+    "question": 15,
+    "question_type": "multiple",
+    "limit_choice": 3,
+    "multiple_question": [
+      {
+        "option_text": "A. Máy in (Printer)",
+        "is_correct": true
+      },
+      {
+        "option_text": "B. Tai nghe (Headphone)",
+        "is_correct": true
+      },
+      {
+        "option_text": "C. Loa (Speaker)",
+        "is_correct": true
+      },
+      {
+        "option_text": "D. Bàn di chuột cảm ứng (Touchpad)",
+        "is_correct": false
+      },
+      {
+        "option_text": "E. Chuột (Mouse)",
+        "is_correct": false
+      },
+      {
+        "option_text": "F. Bàn phím (Keyboard)",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "content": "Em hãy cho biết, tùy chọn nào dưới đây là thuật ngữ chỉ kết quả mà máy tính tạo ra, chẳng hạn như thông tin, âm thanh và hình ảnh?",
+    "question": 16,
+    "question_type": "normal",
+    "option": [
+      "A. Đầu ra (Output)",
+      "B. Ổ cứng (Hard Drive)",
+      "C. Bộ nhớ (Memory)",
+      "D. Hệ điều hành (OS)"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id": 17,
+    "content": "Em hãy cho biết, tùy chọn nào sau đây là thiết bị có vai trò lưu trữ thông tin cho hệ điều hành, phần mềm và phần cứng?",
+    "question": 17,
+    "question_type": "normal",
+    "option": [
+      "A. Bộ nguồn",
+      "B. Màn hình",
+      "C. Card âm thanh",
+      "D. Bộ nhớ"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id": 18,
+    "content": "Em hãy cho biết, tùy chọn nào dưới đây hỗ trợ chức năng cơ bản và điều khiển các phần khác nhau của máy tính?",
+    "question": 18,
+    "question_type": "normal",
+    "option": [
+      "A. Dữ liệu (Data)",
+      "B. Đầu vào (Input)",
+      "C. Đầu vào (Input)",
+      "D. Hệ điều hành (OS)"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id": 19,
+    "content": "Hành động nỗ lực khai thác hệ thống máy tính hoặc mạng riêng bên trong máy tính được gọi là gì?",
+    "question": 19,
+    "question_type": "normal",
+    "option": [
+      "A. Bystander",
+      "B. Hacking",
+      "C. Dấu chân kĩ thuật số (Digital Footprint)",
+      "D. Công dân kỉ nguyên số (Digital Citizenship)"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id": 20,
+    "content": "Hầu hết các điện thoại thông minh đều có tùy chọn gói dữ liệu di động. Em hãy cho biết, tùy chọn nào sau đây mô tả chính xác dữ liệu di động là gì?",
+    "question": 20,
+    "question_type": "normal",
+    "option": [
+      "A. Điện thoại của em có bao nhiêu bộ nhớ.",
+      "B. Truy cập Internet không dây có tính phí, được đo bằng mức tiêu thụ dữ liệu.",
+      "C. Em được phép gửi bao nhiêu tin nhắn văn bản",
+      "D. Em được phân bổ bao nhiêu thời gian để gọi điện thoại."
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id": 21,
+    "content": "Em hãy cho biết, hai lợi ích của việc tải xuống (Download) tập tin thay vì phát trực tuyến (Stream) tập tin đó là gì? (Chọn 2)",
+    "question": 21,
+    "question_type": "multiple",
+    "limit_choice": 2,
+    "multiple_question": [
+      {
+        "option_text": "A. Sau khi tải xuống hoàn tất, quá trình phát lại đáng tin cậy hơn.",
+        "is_correct": true
+      },
+      {
+        "option_text": "B. Phát trực tuyến có khả năng phát lại mượt mà hơn.",
+        "is_correct": false
+      },
+      {
+        "option_text": "C. Không yêu cầu dung lượng lưu trữ.",
+        "is_correct": false
+      },
+      {
+        "option_text": "D. Tệp tin đã được tải xuống không yêu cầu kết nối Internet để phát lại.",
+        "is_correct": true
+      },
+      {
+        "option_text": "E. Không cần phát đạt trước khi chạy tệp tin.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "content": "Tùy chọn nào dưới đây có thể được sử dụng để truyền dữ liệu không dây giữa hai thiết bị gần nhau?",
+    "question": 22,
+    "question_type": "normal",
+    "option": [
+      "A. Ethernet",
+      "B. Bluetooth",
+      "C. Firewall",
+      "D. Modem"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id": 23,
+    "content": "Thiết bị nào KHÔNG có Camera?",
+    "question": 23,
+    "question_type": "normal",
+    "option": [
+      "A. Google Chromebook",
+      "B. Chuông cửa thông minh (Smart Doorbell)",
+      "C. Tai nghe Bluetooth (Bluetooth Headset)",
+      "D. Apple Iphone"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "id": 24,
+    "content": "Thiết bị nào trong số này là thiết bị nhập (Input Device)?",
+    "question": 24,
+    "question_type": "normal",
+    "option": [
+      "A. Monitor",
+      "B. Printer",
+      "C. Keyboard",
+      "D. Speaker"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "id": 25,
+    "content": "Em hãy cho biết thiết bị lưu trữ được đo lường bằng đơn vị nào sau đây? (Chọn 2)",
+    "question": 25,
+    "question_type": "multiple",
+    "limit_choice": 2,
+    "multiple_question": [
+      {
+        "option_text": "A. Terabytes",
+        "is_correct": true
+      },
+      {
+        "option_text": "B. Centimeters",
+        "is_correct": false
+      },
+      {
+        "option_text": "C. Inches",
+        "is_correct": false
+      },
+      {
+        "option_text": "D. Feet",
+        "is_correct": false
+      },
+      {
+        "option_text": "E. Gigabytes",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "content": "Em hãy cho biết, loại kết nối không dây nào sau đây sẽ cho phép em tải hình ảnh từ máy ảnh vào máy tính?",
+    "question": 26,
+    "question_type": "normal",
+    "option": [
+      "A. VGA",
+      "B. HDMI",
+      "C. Bluetooth",
+      "D. RCA"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "id": 27,
+    "content": "Em hãy cho biết, thiết bị chuột trên máy tính bảng đã được thay thế bằng những tùy chọn nào đây? (Chọn 2)",
+    "question": 27,
+    "question_type": "multiple",
+    "limit_choice": 2,
+    "multiple_question": [
+      {
+        "option_text": "A. Bút chì (Pencil)",
+        "is_correct": false
+      },
+      {
+        "option_text": "B. Bút cảm ứng (Stylus)",
+        "is_correct": true
+      },
+      {
+        "option_text": "C. Màn hình cảm ứng (Touch Screen)",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "content": "Em hãy cho biết, tùy chọn nào sau đây là thành phần quan trọng nhất được sử dụng để chạy các ứng dụng?",
+    "question": 28,
+    "question_type": "normal",
+    "option": [
+      "A. Bộ lưu trữ",
+      "B. Thẻ sim",
+      "C. Card màn hình",
+      "D. Bộ nhớ"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id": 29,
+    "content": "Các thiết bị di động có dung lượng bộ nhớ hạn chế so với máy tính để bàn. Em hãy cho biết, tùy chọn nào sau đây có khả năng làm cho thiết bị di động của em hết dung lượng bộ nhớ?",
+    "question": 29,
+    "question_type": "normal",
+    "option": [
+      "A. Sạc thiết bị di động trước khi hết pin.",
+      "B. Thường xuyên quên xóa bộ nhớ đệm",
+      "C. Truyền phát các video HD",
+      "D. Cài quá nhiều Game"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id": 30,
+    "content": "Hệ điều hành (OS) là gì?",
+    "question": 30,
+    "question_type": "normal",
+    "option": [
+      "A. Phần mềm hỗ trợ các chức năng cơ bản của máy tính.",
+      "B. Một cái gì đó đi vào máy tính.",
+      "C. Thiết bị vật lý lưu trữ thông tin cho hệ điều hành, phần mềm và phần cứng.",
+      "D. Khu vực làm việc của màn hình máy tính."
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id": 31,
+    "content": "Em hãy cho biết, tùy chọn nào là phương pháp cho phép truy cập và cập nhật các tập tin trực tuyến?",
+    "question": 31,
+    "question_type": "normal",
+    "option": [
+      "A. Lưu trữ đám mây",
+      "B. Bộ lưu trữ USB",
+      "C. Ổ cứng ngoài",
+      "D. Email"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id": 32,
+    "content": "Em hãy cho biết, tùy chọn nào sau đây là cách để tăng không gian lưu trữ cho điện thoại thông minh ? (Chọn 2)",
+    "question": 32,
+    "question_type": "multiple",
+    "limit_choice": 2,
+    "multiple_question": [
+      {
+        "option_text": "A. Thường xuyên xóa các ứng dụng.",
+        "is_correct": false
+      },
+      {
+        "option_text": "A. Gỡ cài đặt bất kì trò chơi nào mà em không chơi nữa.",
+        "is_correct": true
+      },
+      {
+        "option_text": "B. Truyền các tệp tin sang máy tính.",
+        "is_correct": true
+      },
+      {
+        "option_text": "C. Không chụp thêm nhiều ảnh và video.",
+        "is_correct": false
+      },
+      {
+        "option_text": "D. Gỡ tất cả các chương trình nền đang chạy.",
+        "is_correct": false
+      },
+      {
+        "option_text": "E. Xóa toàn bộ tin nhắn đã gửi.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "content": "Địa chỉ của một trang Web được gọi là gì?",
+    "question": 33,
+    "question_type": "normal",
+    "option": [
+      "A. Tác giả (Author)",
+      "B. Tiêu đề trang (Page Title)",
+      "C. Nhà xuất bản (Publisher)",
+      "D. URL"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "id": 34,
+    "content": "Em hãy cho biết, tùy chọn nào là loại lưu trữ dữ liệu được truy cập từ xa thông qua kết nối Internet?",
+    "question": 34,
+    "question_type": "normal",
+    "option": [
+      "A. Lưu trữ đám mây",
+      "B. Đĩa CD",
+      "C. Bộ lưu trữ USB",
+      "D. Ổ cứng ngoài"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "id": 35,
+    "content": "Em gọi các thiết bị máy tính được kết nối với nhau có thể trao đổi dữ liệu và chia sẻ tài nguyên là gì?",
+    "question": 35,
+    "question_type": "normal",
+    "option": [
+      "A. Ethernet",
+      "B. Mạng máy tính (Computer Network)",
+      "C. Bluetooth",
+      "D. Bộ nhớ (Memory)"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "id": 36,
+    "content": "Em hãy cho biết, phần mềm Virus ảnh hưởng đến hệ thống máy tính như thế nào? (Chọn 2)",
+    "question": 36,
+    "question_type": "multiple",
+    "limit_choice": 2,
+    "multiple_question": [
+      {
+        "option_text": "A. Làm hỏng các tệp tin.",
+        "is_correct": true
+      },
+      {
+        "option_text": "B. Thu thập và chuyển thông tin cá nhân.",
+        "is_correct": true
+      },
+      {
+        "option_text": "C. Làm chậm hiệu suất của máy tính.",
+        "is_correct": true
+      },
+      {
+        "option_text": "D. Sửa chữa các tệp bị hỏng.",
+        "is_correct": false
+      },
+      {
+        "option_text": "E. Không cho phép máy tính khởi động.",
+        "is_correct": false
+      }
+    ]
+  },
   {
     "id": 37,
     "content": "Em hãy ghép nối từng thiết bị điện tử ở bên phải với khả năng thu hình/tiếng tương ứng ở bên trái.",
@@ -751,29 +751,29 @@ export const questions: Question[] = [
       }
     ]
   },
-  // {
-  //   "id": 38,
-  //   "content": "Hãy di chuyển từng phương thức giao tiếp từ danh sách bên phải sang tình huống sử dụng tương ứng bên trái.",
-  //   "question": 38,
-  //   "question_type": "drop_match",
-  //   "match_question": [
-  //     {
-  //       "id":4,
-  //       "term": "Email",
-  //       "definition": "Dùng cho những tin nhắn có nội dung dài và không cần phản hồi ngay."
-  //     },
-  //     {
-  //       "id":5,
-  //       "term": "Hội thảo truyền hình",
-  //       "definition": "Dùng để giao tiếp và tương tác qua lại tức thì. "
-  //     },
-  //     {
-  //       "id":6,
-  //       "term": "Tin nhắn",
-  //       "definition": "Dùng cho những tin nhắn ngắn, không trang trọng và cần phản hồi nhanh ngay cả khi người đó đang ở nhà."
-  //     }
-  //   ]
-  // }
+  {
+    "id": 38,
+    "content": "Hãy di chuyển từng phương thức giao tiếp từ danh sách bên phải sang tình huống sử dụng tương ứng bên trái.",
+    "question": 38,
+    "question_type": "drop_match",
+    "match_question": [
+      {
+        "id":4,
+        "term": "Email",
+        "definition": "Dùng cho những tin nhắn có nội dung dài và không cần phản hồi ngay."
+      },
+      {
+        "id":5,
+        "term": "Hội thảo truyền hình",
+        "definition": "Dùng để giao tiếp và tương tác qua lại tức thì. "
+      },
+      {
+        "id":6,
+        "term": "Tin nhắn",
+        "definition": "Dùng cho những tin nhắn ngắn, không trang trọng và cần phản hồi nhanh ngay cả khi người đó đang ở nhà."
+      }
+    ]
+  }
 ]
 
 

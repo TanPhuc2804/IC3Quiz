@@ -18,4 +18,6 @@ const getById = expressAsyncHandler(async (req, res) => {
     res.json(exam);
 });
 
+
+
 module.exports = { getAllExam, getById }

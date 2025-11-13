@@ -6,6 +6,8 @@ export interface User {
     username: string,
     fullname: string,
     role: string,
+    status: string,
+    package?: any,
     email?: string,
     password?: string,
     birthday?: string,
@@ -28,12 +30,14 @@ export interface Exam {
 }
 
 export interface Question {
-    id: number,
+    _id:string,
+    id?: number,
     content: string,
-    question: number,
+    question?: number,
     question_type: QuestionType
     limit_choice?: number
     correct_answer?: string,
+    exam_id?: any[],
     option?: string[],
     classify_question?: ClassificationQuestion[],
     multiple_question?: Mutiple_Question[],
@@ -53,6 +57,7 @@ export interface ClassificationQuestion {
 }
 
 export interface Mutiple_Question {
+    id?: number,
     option_text: string,
     is_correct: boolean,
 }
@@ -66,7 +71,9 @@ export interface Exam_Result {
     accurary_percentage: number, // phan tram dung
     error_percentage: number,// phan tram sai
     total_content: number,
-    result_detail: ResultsType[]
+    result_detail: ResultsType[],
+    createdAt?: string,
+    updatedAt?: string,
 }
 
 export interface Category {
