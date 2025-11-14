@@ -55,14 +55,14 @@ const vnpayReturn = expressAsyncHandler(async (req, res) => {
     const { vnp_ResponseCode, vnp_Amount, vnp_OrderInfo, vnp_PayDate } = vnp_Params;
     if (vnp_ResponseCode === "00") {
         const packageId = vnp_OrderInfo.split(" ")[3]
-        const package = await packageMopdel.findById(packageId)
+        const packages = await packageMopdel.findById(packageId)
         const date = moment(vnp_PayDate, "YYYYMMDDHHmmss").toDate();
-        const exprie_date = moment(date).add(package.duration, "days").toDate()
-        if (!package) {
+        const exprie_date = moment(date).add(packages.duration, "days").toDate()
+        if (!packages) {
             throw new AppError("Gói không tồn tại", 404)
         }
         const userPackge = {
-            package_id: package._id,
+            package_id: packages._id,
             register_date: date,
             expire_date: exprie_date
         }

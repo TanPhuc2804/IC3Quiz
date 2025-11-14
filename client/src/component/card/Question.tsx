@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Question, ResultQuestionType, ResultsType } from '../../types'
 import ButtonQuestion from '../button/ButtonQuestion'
 import { ConfigProvider, type RadioChangeEvent, type GetProp, Checkbox } from 'antd'
@@ -34,10 +34,10 @@ function QuestionComponent({ question, setResults, setCountQuestionResult, mode 
     const [isChoice, setIsChoice] = useState(false)
     const [valueNormal, setValueNormal] = useState("");
     const [option, setOptions] = useState<any>([])
-    const [valueMultiple, setValueMultiple] = useState<any[]>([])
+    const [_valueMultiple, setValueMultiple] = useState<any[]>([])
 
     const [answersClassify, setAnswersClassify] = useState<Record<string | number, string>>({});
-    const [countMatch, setCountMatch] = useState(0)
+    const [_countMatch, setCountMatch] = useState(0)
     const [resultNormal, setResultNormal] = useState<ResultQuestionType>(resultNormalInit)
     const [resultQuestion, setResultQuestion] = useState<ResultQuestionType[]>([])
     const [isFaulty, setIsFaulty] = useState(false)
@@ -79,20 +79,19 @@ function QuestionComponent({ question, setResults, setCountQuestionResult, mode 
     }, [question])
     useEffect(() => {
         setResults(pre => {
-            if (pre.length === 0 || pre.findIndex(item => item.question_id === question.id) === -1) {
+            const qid = question.id ?? 0;
+            if (pre.length === 0 || pre.findIndex(item => item.question_id === qid) === -1) {
                 return [
                     ...pre,
                     {
-                        question_id: question.id,
+                        question_id: qid,
                         question: question.question,
                         question_type: question.question_type
-
-                    }
+                    } as ResultsType
                 ]
             }
-            const resultsTerm = [...pre]
-            const newResult = resultsTerm.map(item => {
-                if (item.question_id === question.id) {
+            const newResult = pre.map(item => {
+                if (item.question_id === qid) {
                     return {
                         ...item,
                         user_answer: (question.question_type === QuestionType.NORMAL) ? resultNormal : resultQuestion
@@ -125,15 +124,15 @@ function QuestionComponent({ question, setResults, setCountQuestionResult, mode 
                 return [
                     ...pre,
                     {
-                        id: question.id,
+                        id: question.id ?? 0,
                         isDone: true
                     }
                 ]
             })
-            changBgItemQuestion(question.question, isChoice)
+            changBgItemQuestion(question.question || 0, isChoice)
         } else {
-            setCountQuestionResult(pre => pre.filter(item => item.id !== question.id))
-            changBgItemQuestion(question.question, isChoice)
+            setCountQuestionResult(pre => pre.filter(item => item.id !== (question.id ?? 0)))
+            changBgItemQuestion(question.question || 0, isChoice)
         }
     }, [resultQuestion, resultNormal])
     const getComponentType = (type: string) => {
@@ -338,25 +337,6 @@ function QuestionComponent({ question, setResults, setCountQuestionResult, mode 
         }
     };
 
-    const testData = (type: string) => {
-        if (type != QuestionType.MULTIPLE) return
-        if (type === QuestionType.CLASSIFY) {
-            console.log("Classify " + " Question: " + question.id, answersClassify)
-            return
-        }
-        if (type === QuestionType.MULTIPLE) {
-            console.log("Multiple" + " Question: " + question.id, valueMultiple)
-            return
-        }
-        if (type === QuestionType.DROP_MATCH) {
-            console.log("Mach Question ")
-            return
-        }
-        if (type === QuestionType.NORMAL) {
-            console.log("Normal" + " Question: " + question.id, valueNormal)
-            return
-        }
-    }
 
     const getCorrectAnwser = (type: string) => {
         if (type === QuestionType.NORMAL) {
@@ -422,7 +402,7 @@ function QuestionComponent({ question, setResults, setCountQuestionResult, mode 
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
                 >
-                    <ButtonQuestion size="large" content={question?.question} />
+                    <ButtonQuestion size="large" content={question?.question || 0} />
                     <motion.div
                         className="flex flex-col gap-3"
                         initial={{ opacity: 0 }}

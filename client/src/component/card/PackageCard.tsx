@@ -1,4 +1,4 @@
-import React from 'react'
+
 import type { Package } from '../../types'
 import { formatCurrencyVND } from '../../utils/currency.utils'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

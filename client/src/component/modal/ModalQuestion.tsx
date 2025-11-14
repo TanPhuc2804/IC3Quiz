@@ -1,5 +1,4 @@
 import { Modal } from 'antd'
-import React from 'react'
 import type { Question } from '../../types';
 import QuestionDetail from '../orther/QuestionDetail';
 

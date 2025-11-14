@@ -1,4 +1,4 @@
-import React from 'react'
+
 import AvatarUser from '../../../avatar/Avatar'
 import TimeLineStory from '../../../timeline/TimeLine'
 import Statistics from './Statistics'

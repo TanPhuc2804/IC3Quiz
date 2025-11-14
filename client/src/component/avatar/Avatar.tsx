@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Avatar } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-regular-svg-icons'

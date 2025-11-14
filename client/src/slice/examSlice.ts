@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { Exam, User } from '../types';
+import type { Exam } from '../types';
 
 export interface ExamState {
     exams: Exam[];

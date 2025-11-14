@@ -1,5 +1,5 @@
-import React, { memo, useState } from 'react'
-import { DragDropContext, Droppable, Draggable, type DropResult, type DragStart, type ResponderProvided } from 'react-beautiful-dnd';
+import { memo, useState } from 'react'
+import { DragDropContext, Droppable, Draggable, type DropResult } from 'react-beautiful-dnd';
 import type { MatchQuestion, ResultQuestionType } from '../../types';
 import Definitions from '../card/Definitions';
 

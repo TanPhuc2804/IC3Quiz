@@ -1,4 +1,4 @@
-import { Button, Typography } from "antd"
+
 import ButtonDefauld from "../component/button/ButtonDefauld"
 import AboutUs from "../component/layouts/sections/home/AboutUs"
 import ContactUs from "../component/layouts/sections/home/ContactUs"

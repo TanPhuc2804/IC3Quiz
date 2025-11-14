@@ -1,5 +1,5 @@
-import { Checkbox, type GetProp, type RadioChangeEvent } from 'antd'
-import React, { useState } from 'react'
+import { Checkbox} from 'antd'
+import  { useState } from 'react'
 import type { ResultQuestionType } from '../../types';
 import { ModeEnum } from '../../types/enums';
 
@@ -10,11 +10,7 @@ type CheckBoxProp = {
     faulties: ResultQuestionType[],
     mode:string
 };
-const style: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 8
-}
+
 function CheckBoxComponent({ onChange, options, limit_choice, faulties,mode }: CheckBoxProp) {
     const [selected, setSelected] = useState<string[]>([]);
 

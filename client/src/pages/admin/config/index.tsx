@@ -1,4 +1,4 @@
-import { DashboardOutlined, ProductOutlined, TeamOutlined } from "@ant-design/icons"
+import { DashboardOutlined, ProductOutlined } from "@ant-design/icons"
 import { faUser } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 

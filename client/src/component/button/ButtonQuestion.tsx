@@ -1,5 +1,5 @@
 import { Button, ConfigProvider } from 'antd'
-import React from 'react'
+
 
 type ButtonQuestionProp= {
   content:string|number,

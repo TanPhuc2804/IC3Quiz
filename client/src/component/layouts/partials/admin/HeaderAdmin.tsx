@@ -1,12 +1,9 @@
 import { Typography } from 'antd'
-import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightFromBracket, faBell } from '@fortawesome/free-solid-svg-icons'
-
-import axios from 'axios'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
-const baseURL = "http://localhost:5001/admin"
+
 function HeaderAdmin() {
     const navigate = useNavigate()
     const handleLogout = () => {

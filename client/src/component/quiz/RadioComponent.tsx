@@ -1,5 +1,4 @@
 import { ConfigProvider, Radio, type RadioChangeEvent } from 'antd'
-import React from 'react'
 import { ModeEnum } from '../../types/enums';
 
 type RadioComponentProp = {
@@ -10,11 +9,6 @@ type RadioComponentProp = {
     mode:string
 }
 
-const style: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 8
-};
 
 function RadioComponent({ onChange, value, option, isFaulty,mode }: RadioComponentProp) {
     const getClassname = (valueOtp: string) => {

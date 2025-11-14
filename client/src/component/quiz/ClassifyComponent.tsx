@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+
 import type { ClassificationQuestion, ResultQuestionType } from '../../types'
-import { ConfigProvider, Radio, type RadioChangeEvent } from 'antd'
+import { ConfigProvider, Radio } from 'antd'
 import { ModeEnum } from '../../types/enums'
 
 type ClassifyComponentType = {

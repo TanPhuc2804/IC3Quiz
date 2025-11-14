@@ -1,5 +1,5 @@
 import { Button, ConfigProvider } from 'antd'
-import React from 'react'
+
 
 function ButtonSubmit({disable,handleSubmit}:any) {
 

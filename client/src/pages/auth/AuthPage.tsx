@@ -10,12 +10,7 @@ type formLogin = {
   username: string,
   password: string
 }
-type user = {
-  id: string;
-  fullname: string;
-  email: string;
-  isLogin: boolean
-}
+
 type formRegister = {
   email: string,
   username: string,
@@ -148,7 +143,7 @@ function AuthPage({ }: Props) {
 
   }
 
-  const handleChangeTypePass = (e: React.MouseEvent<HTMLElement, MouseEvent>, name: keyof modeTypePass) => {
+  const handleChangeTypePass = (_e: React.MouseEvent<HTMLElement, MouseEvent>, name: keyof modeTypePass) => {
     setTypePass(pre => {
       return {
         ...pre,

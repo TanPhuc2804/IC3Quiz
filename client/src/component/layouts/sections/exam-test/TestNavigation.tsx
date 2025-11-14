@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ButtonSubmit from '../../../button/ButtonSubmit'
 import TestQuestionListItem from '../../../card/TestQuestionListItem'
 import { useNavigate, useParams } from 'react-router'
-import type { Exam, Exam_Result, ResultQuestionType, ResultsType } from '../../../../types'
+import type { Exam, Exam_Result,  ResultsType } from '../../../../types'
 import { QuestionType } from '../../../../types/enums'
 import axios from 'axios'
 

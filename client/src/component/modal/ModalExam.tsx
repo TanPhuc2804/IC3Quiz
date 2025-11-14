@@ -1,5 +1,4 @@
 import { Modal } from 'antd'
-import React, { useRef } from 'react'
 import ExamConfigurationForm from '../form/FormExam';
 
 type Props = {

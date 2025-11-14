@@ -7,9 +7,9 @@ import { Button, Table } from 'antd';
 import { showMessage } from '../../component/notification/Message';
 import ModalExam from '../../component/modal/ModalExam';
 
-type Props = {}
 
-const Exam = (props: Props) => {
+
+const Exam = () => {
   const [visible, setVisible] = React.useState(false);
   const columns = getExamColumns();
   const exams = useAppSelector(state => state.exam.exams);

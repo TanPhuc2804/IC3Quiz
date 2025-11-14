@@ -1,5 +1,4 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+
 import { Table, Progress, Tag, type TableProps } from 'antd';
 import type { Exam_Result } from '../../types'
 import { useNavigate } from 'react-router';

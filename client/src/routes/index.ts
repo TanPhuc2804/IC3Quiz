@@ -1,9 +1,9 @@
-import MatchQuestinComponent from "../component/quiz/MatchQuestinComponent"
+
 import Home from "../pages/Home"
 import PaymentResult from "../pages/PaymentResult"
 import AdminPage from "../pages/admin"
 import Exam from "../pages/admin/Exam"
-import Question from "../pages/admin/Question"
+import QuestionPage from "../pages/admin/Question"
 import User from "../pages/admin/User"
 import AuthPage from "../pages/auth/AuthPage"
 import ExamDetail from "../pages/user/exam/ExamDetail"
@@ -32,8 +32,8 @@ export const privateRoutes = [
         children: [
             { path: "user", page: User },
             { path: "exam", page: Exam },
-            { path: "question", page: Question },
-            { path: "account", page: Question },
+            { path: "question", page: QuestionPage },
+            { path: "account", page: QuestionPage },
         ]
     }
 ]

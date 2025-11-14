@@ -1,4 +1,4 @@
-import React from 'react'
+
 import type { Exam } from '../../types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleQuestion, faClock, faUser } from '@fortawesome/free-regular-svg-icons'

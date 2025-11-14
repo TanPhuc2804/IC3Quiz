@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, Typography, Tag, List, Space, Divider, Button, Alert, message, Select } from 'antd';
 import { CheckCircleOutlined, InfoCircleOutlined, CloseCircleOutlined, SortAscendingOutlined, ClusterOutlined, PlusOutlined } from '@ant-design/icons';
 import { QuestionType } from '../../types/enums';
@@ -217,7 +217,7 @@ const QuestionDetail: React.FC<{ question: Question }> = ({ question }) => {
             questionId: question._id
         }, { withCredentials: true })
             .then(response => {
-                dispatch(insertExam({ questionId: question._id, exams: response.data.question.exam_id }));
+                dispatch(insertExam({ questionId: question._id || "", exams: response.data.question.exam_id }));
                 message.success("Cập nhật bộ đề thành công.");
 
             })
@@ -262,7 +262,7 @@ const QuestionDetail: React.FC<{ question: Question }> = ({ question }) => {
             examId: examIdToRemove, questionId: question._id
         }, { withCredentials: true })
             .then(response => {
-                dispatch(insertExam({ questionId: question._id, exams: response.data.question.exam_id }));
+                dispatch(insertExam({ questionId: question._id || "", exams: response.data.question.exam_id }));
                 message.success("Cập nhật bộ đề thành công.");
             })
             .catch(error => {

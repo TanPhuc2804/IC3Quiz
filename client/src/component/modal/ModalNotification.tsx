@@ -1,6 +1,5 @@
-import { CloseCircleOutlined } from '@ant-design/icons'
-import { Button, Modal, Result, Typography } from 'antd'
-import React from 'react'
+
+import {  Modal, Result } from 'antd'
 import type { ErrorResponse } from '../../types'
 
 type Props = {

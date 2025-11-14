@@ -1,6 +1,5 @@
-import React from 'react'
+
 import type { Exam } from '../../types'
-import ButtonDefauld from '../button/ButtonDefauld'
 
 type ExamDetailType = {
     exam?: Exam

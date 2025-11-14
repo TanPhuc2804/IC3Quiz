@@ -13,7 +13,7 @@ function App() {
       .then(response => {
         setAuth(response.data.user);
       })
-      .catch(error => {
+      .catch(_error => {
         setAuth(null);
       });
   }, []);

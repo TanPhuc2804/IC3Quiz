@@ -1,6 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { ResultsType, Exam_Result, ResultQuestionType } from '../../../types'
-import { results } from '../../../data'
 import { Button } from 'antd'
 import ExamResultCard from '../../../component/card/ExamResultCard'
 import StatisticsResult from '../../../component/card/StatisticsResult'

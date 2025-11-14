@@ -3,7 +3,6 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { faBullseye } from '@fortawesome/free-solid-svg-icons/faBullseye'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { motion } from "framer-motion";
-import React from 'react'
 
 type ExamResultCardType = {
     accurary_percentage: number,

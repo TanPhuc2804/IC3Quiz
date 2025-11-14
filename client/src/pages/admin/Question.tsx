@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getQuestionColumns } from './config/column_table';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getAllQuestions, selectedQuestion } from '../../slice/questionSlice';
@@ -8,9 +8,8 @@ import { Button, Table } from 'antd';
 import ModalQuestion from '../../component/modal/ModalQuestion';
 import type { Question } from '../../types';
 import ModalFileQuestion from '../../component/modal/ModalFileQuestion';
-type Props = {}
 
-const Question = (props: Props) => {
+const QuestionComponent = () => {
   const handleAction = (record: any, actionType: 'edit' | 'delete') => {
     if (actionType === 'edit') {
       console.log('Edit action for record:', record);
@@ -42,9 +41,9 @@ const Question = (props: Props) => {
         rowKey={"_id"}
         pagination={{ pageSize: 10 }}
         scroll={{ y: 500 }}
-        onRow={(record, rowIndex) => {
+        onRow={(record, _rowIndex) => {
           return {
-            onClick: event => {
+            onClick: _event => {
               dispatch(selectedQuestion(record));
               setIsOpen(true);
             },
@@ -58,4 +57,4 @@ const Question = (props: Props) => {
     </>
   )
 }
-export default Question
+export default QuestionComponent

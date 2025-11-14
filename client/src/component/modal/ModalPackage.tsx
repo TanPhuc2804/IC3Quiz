@@ -1,6 +1,6 @@
 import { Modal } from 'antd'
-import React, { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from "framer-motion";
+import  { useEffect, useState } from 'react'
+import { motion } from "framer-motion";
 import type { Package } from '../../types'
 import axios from 'axios'
 import Loading from '../loading/Loading';

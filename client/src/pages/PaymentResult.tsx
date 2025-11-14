@@ -1,16 +1,13 @@
 import { Button, Result } from 'antd'
 import axios from 'axios';
-import React, { useEffect } from 'react'
-import { motion, AnimatePresence } from "framer-motion";
-import { useParams } from 'react-router'
+import  { useEffect, useState } from 'react'
+import  { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
 import { showMessage } from '../component/notification/Message';
 import Loading from '../component/loading/Loading';
 
-type Props = {}
-
-const PaymentResult = (props: Props) => {
-    const [loading, setLoading] = React.useState<boolean>(true);
+const PaymentResult = () => {
+    const [loading, setLoading] = useState<boolean>(true);
     const [params] = useSearchParams()
     useEffect(() => {
         const verifyPayment = async () => {

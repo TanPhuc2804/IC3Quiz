@@ -1,4 +1,4 @@
-import React from 'react'
+
 import NavItem from './NavItem'
 
 function Footer() {

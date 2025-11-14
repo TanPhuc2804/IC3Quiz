@@ -157,7 +157,7 @@ export const getQuestionColumns = (
         {
             title: 'STT',
             key: 'stt',
-            render: (text, record, index) => index + 1,
+            render: (_text, _record, index) => index + 1,
             width: 70,
             align: 'center',
         },
@@ -216,7 +216,7 @@ export const getQuestionColumns = (
         {
             title: 'Hành động',
             key: 'action',
-            render: (text, record: Question) => (
+            render: (_text, record: Question) => (
                 <Space size="middle">
                     <Button
                         type="link"

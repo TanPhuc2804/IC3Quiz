@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import type { TableResult, ResultsType, Question, QuestionTableType } from '../../types'
+import{ useMemo } from 'react'
+import type { TableResult, ResultsType,  QuestionTableType } from '../../types'
 import { Table, Tag, type TableProps } from 'antd';
 import { QuestionType as TypeEnum } from '../../types/enums';
 import { motion } from "framer-motion";

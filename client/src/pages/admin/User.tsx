@@ -1,4 +1,4 @@
-import React, { use, useEffect } from 'react'
+import React, {useEffect } from 'react'
 import { getUserColumns } from './config/column_table';
 import type { User } from '../../types';
 import axios from 'axios';
@@ -6,9 +6,8 @@ import { Table } from 'antd';
 import { showMessage } from '../../component/notification/Message';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { allUsers,changeStatusRedux } from '../../slice/userSlice';
-type Props = {}
 
-const User = (props: Props) => {
+const UserComponent = () => {
   const handleActivate = (idUser: User['_id']) => {
     const importUrl = import.meta.env.VITE_API_URL
     const changeStatus = () => {
@@ -27,7 +26,7 @@ const User = (props: Props) => {
     changeStatus();
   }
   const columns = getUserColumns(handleActivate);
-  const [user, setUser] = React.useState<User[]>([]);
+  const [_user, setUser] = React.useState<User[]>([]);
   const users = useAppSelector(state => state.user.users);
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -54,4 +53,4 @@ const User = (props: Props) => {
     />
   )
 }
-export default User
+export default  UserComponent

@@ -1,12 +1,11 @@
 import { Breadcrumb, Layout, Menu, theme, Typography } from 'antd';
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router';
 import { items, itemUser } from './config';
 import HeaderAdmin from '../../component/layouts/partials/admin/HeaderAdmin';
-const { Header, Content, Footer, Sider } = Layout
+const { Header, Content, Sider } = Layout
 
-type Props = {}
-const AdminPage = (props: Props) => {
+const AdminPage = () => {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
 

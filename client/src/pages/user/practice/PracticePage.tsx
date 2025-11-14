@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useParams } from "react-router-dom";
-import type { Question, Exam as ExamType, ResultQuestionType, ResultsType, ErrorResponse } from '../../../types'
+import type { Question, Exam as ExamType, ResultsType, ErrorResponse } from '../../../types'
 import { useLocation } from 'react-router'
 import TestNavigation from '../../../component/layouts/sections/exam-test/TestNavigation'
 import QuestionComponent from '../../../component/card/Question'
@@ -75,12 +75,13 @@ function PracticePage() {
         fetchData()
     }, [])
 
-    //filter data
     useEffect(() => {
-        const questionFilter = questions.map(({ id, question }) => ({ id, question }))
+        const questionFilter = questions
+            .filter((q): q is Question & { id: number; question: number } => typeof q.id === "number" && typeof q.question === "number")
+            .map(({ id, question }) => ({ id, question }));
         setQuestionsFliter(questionFilter)
         setIsDone(mode === ModeEnum.TRAINING)
-    }, [questions])
+    }, [questions, mode])
     useEffect(() => {
         if (mode === ModeEnum.TRAINING)
             return
@@ -167,7 +168,8 @@ function PracticePage() {
                                         <div
                                             key={question.id}
                                             ref={(el) => {
-                                                questionRefs.current[question.id] = el;
+                                                const id = typeof question.id === "number" ? question.id : index;
+                                                questionRefs.current[id] = el;
                                             }}
                                         >
                                             <QuestionComponent

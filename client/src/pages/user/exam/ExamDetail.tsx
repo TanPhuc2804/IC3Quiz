@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 import { useParams } from "react-router-dom";
 import type { Exam_Result, Exam as ExamType } from '../../../types'

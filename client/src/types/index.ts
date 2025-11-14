@@ -30,7 +30,7 @@ export interface Exam {
 }
 
 export interface Question {
-    _id:string,
+    _id?:string,
     id?: number,
     content: string,
     question?: number,

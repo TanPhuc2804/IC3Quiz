@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import type { Exam as ExamType } from "../../../../types/index"
-import { exams as examsData } from '../../../../data'
 import ExamCard from '../../../card/ExamCard'
 import axios from 'axios'
 type ExamProp ={

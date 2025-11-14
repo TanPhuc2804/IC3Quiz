@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React,  { useEffect } from 'react';
 import { Form, Input, InputNumber, Button, Card, Divider, Select, Space, Typography, Tag, message, Row, Col, Statistic } from 'antd';
-import { MinusCircleOutlined, PlusOutlined, ClockCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { MinusCircleOutlined, PlusOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useAppDispatch } from '../../hooks/redux';
 import { insertExam } from '../../slice/examSlice';
 
-const { Title, Text, Link } = Typography;
+const { Text } = Typography;
 const { TextArea } = Input;
 const QuestionTypeOptions = {
     NORMAL: "normal",
@@ -38,14 +38,6 @@ const questionTypeMapping: Record<QuestionType, string> = {
 };
 
 
-const formatDuration = (minutes: number): string => {
-    if (minutes >= 60) {
-        const hours = Math.floor(minutes / 60);
-        const remainingMinutes = minutes % 60;
-        return `${hours} giờ ${remainingMinutes > 0 ? `${remainingMinutes} phút` : ''}`.trim();
-    }
-    return `${minutes} phút`;
-};
 
 interface Props {
     onSubmit?: (data: ExamFormData) => void;
@@ -109,7 +101,7 @@ const ExamConfigurationForm: React.FC<Props> = (props) => {
                 form={form}
                 layout="vertical"
                 onFinish={onFinish}
-                onValuesChange={(changedValues, allValues) => {
+                onValuesChange={(_, allValues) => {
                     updateRequiredCount(allValues.require_questions);
                 }}
                 scrollToFirstError
