@@ -115,7 +115,7 @@ function PracticePage() {
         }
 
     }
-    console.log(questions)
+    console.log(results)
     if (loading)
         return (
             <motion.div

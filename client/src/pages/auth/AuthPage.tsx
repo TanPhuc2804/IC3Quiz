@@ -267,6 +267,7 @@ function AuthPage({ }: Props) {
           showMessage(res.data.status, res.data.status ? "Đăng nhập thành công" : "Đăng nhập thất bại")
           if (res.data.role === "admin") {
             // Redirect to admin dashboard
+            window.location.href = "/admin"
           } else {
             window.location.href = "/"
           }

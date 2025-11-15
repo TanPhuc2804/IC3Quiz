@@ -11,7 +11,7 @@ export interface User {
 
 interface AuthContextType {
   user: User | null;
-  setAuth: (data: User |null) => void;
+  setAuth: (data: User | null) => void;
   logout: () => void;
 }
 
@@ -40,9 +40,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setUser(null);
     const apiUrl = import.meta.env.VITE_API_URL
     axios.get(`${apiUrl}/auth/logout`, { withCredentials: true })
-      .then(response => {
+      .then(async response => {
         if (response.data.status) {
-          localStorage.removeItem("authUser");
+          await new Promise(resolve => setTimeout(resolve, 50))
+          window.location.href = '/';
         }
       });
 

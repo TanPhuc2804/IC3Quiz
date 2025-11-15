@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import ButtonSubmit from '../../../button/ButtonSubmit'
 import TestQuestionListItem from '../../../card/TestQuestionListItem'
 import { useNavigate, useParams } from 'react-router'
-import type { Exam, Exam_Result,  ResultsType } from '../../../../types'
+import type { Exam, Exam_Result, ResultsType } from '../../../../types'
 import { QuestionType } from '../../../../types/enums'
 import axios from 'axios'
 
@@ -28,12 +28,13 @@ const formatTime = (seconds: number) => {
 const changeMinutesToSeconds = (minutes: number) => minutes * 60
 
 function calculateResult(details: ResultsType[], exam: Exam, submit_time: number): Exam_Result {
+
     let score = 0;
     const total_content = details.length;
-
+    console.log("calculateResult - details:", details, total_content)
     details.forEach((q) => {
         if (q.question_type === QuestionType.NORMAL) {
-
+            ``
             // normal chỉ có 1 answer object
             if (q.user_answer && !Array.isArray(q.user_answer) && q.user_answer.isCorrect) {
                 score += 1;
@@ -54,9 +55,9 @@ function calculateResult(details: ResultsType[], exam: Exam, submit_time: number
     const error_percentage = +(100 - accuracy_percentage).toFixed(1);
 
     return {
-        score,
-        accurary_percentage: accuracy_percentage,
-        error_percentage,
+        score: score ?? 0,
+        accurary_percentage: isNaN(accuracy_percentage) ? 0 : accuracy_percentage,
+        error_percentage: isNaN(error_percentage) ? 0 : error_percentage,
         total_content,
         user_id: 1,
         exam: exam,
@@ -76,8 +77,10 @@ function TestNavigation({ questionsProp, isDone, duration, results, exam }: Test
         const timer = setInterval(() => {
             setTimer(pre => {
                 const newSenconds = pre + 1
+                //newSenconds === maxDuration
                 if (newSenconds === maxDuration) {
                     alert("Het thời gian")
+                    //handleSubmit()
                 }
                 return newSenconds
             })
@@ -88,6 +91,7 @@ function TestNavigation({ questionsProp, isDone, duration, results, exam }: Test
 
     const handleSubmit = () => {
         const resultExam = calculateResult(results, exam, timer)
+
         const apiUrl = import.meta.env.VITE_API_URL
         axios.post(`${apiUrl}/users/save-result`, { ...resultExam, exam: resultExam.exam._id }, { withCredentials: true })
             .then(response => {
@@ -95,7 +99,6 @@ function TestNavigation({ questionsProp, isDone, duration, results, exam }: Test
                 navigate(`/exams/${id}/result`, { state: { results: resultExam } })
             })
             .catch(error => {
-                alert("Error: ")
                 console.log(error)
             });
 

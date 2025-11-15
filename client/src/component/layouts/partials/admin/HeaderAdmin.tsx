@@ -3,11 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightFromBracket, faBell } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
+import { useAuth } from '../../../../contexts/AuthContext'
 
 function HeaderAdmin() {
     const navigate = useNavigate()
+    const { logout } = useAuth();
     const handleLogout = () => {
-      
+        logout();
+        //window.location.href = '/';
     }
     const handleNavigate = () => {
         navigate("account")

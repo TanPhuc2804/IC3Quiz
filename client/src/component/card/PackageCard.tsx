@@ -16,8 +16,7 @@ type Props = {
 const PackageCard = (props: Props) => {
 
     const handleBuy = () => {
-        if (props.user_bought === props.package._id) {
-            showMessage(false, "Bạn đã có gói sử dụng, không thể mua thêm gói mới");
+        if(props.user_bought === props.package._id){
             return;
         }
         const apiUrl = import.meta.env.VITE_API_URL;

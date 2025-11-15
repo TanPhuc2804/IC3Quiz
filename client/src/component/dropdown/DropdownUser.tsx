@@ -44,7 +44,7 @@ const DropdownUser = (props: Props) => {
             icon: <LogoutOutlined />,
             onClick: () => {
                 logout();
-                window.location.reload();
+                //window.location.href = '/';
             }
         },
 

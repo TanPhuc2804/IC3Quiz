@@ -47,6 +47,7 @@ const ModalPackage = (props: Props) => {
                     setPackageSelected(data);
                 })
                 .catch(err => {
+                    setPackageSelected({ package_id: "", duration: "" });
                     console.error("Error fetching packages: ", err)
                 });
         }
