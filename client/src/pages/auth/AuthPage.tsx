@@ -439,7 +439,7 @@ function AuthPage({ }: Props) {
               }}>
               Đăng ký </button>
           </div>
-          <img src="/public/enter-password.svg" className="image ml-[10px]  h-[420px] w-[50px]" alt="login-image"></img>
+          <img src="/enter-password.svg" className="image ml-[10px]  h-[420px] w-[50px]" alt="login-image"></img>
 
 
         </div>
@@ -463,7 +463,7 @@ function AuthPage({ }: Props) {
               }}
             > Đăng nhập </button>
           </div>
-          <img src="/public/sign-up.svg" className="image" alt="login-image"></img>
+          <img src="/sign-up.svg" className="image" alt="login-image"></img>
         </div>
       </div>
 
