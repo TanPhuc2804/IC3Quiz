@@ -265,12 +265,14 @@ function AuthPage({ }: Props) {
       axios.post(`${apiUrl}/auth/login`, formLogin, { withCredentials: true })
         .then(res => {
           showMessage(res.data.status, res.data.status ? "Đăng nhập thành công" : "Đăng nhập thất bại")
-          if (res.data.role === "admin") {
-            // Redirect to admin dashboard
-            window.location.href = "/admin"
-          } else {
-            window.location.href = "/"
-          }
+          setTimeout(() => {
+            if (res.data.role === "admin") {
+              // Redirect to admin dashboard
+              window.location.href = "/admin"
+            } else {
+              window.location.href = "/"
+            }
+          }, 1000)
         })
         .catch(err => {
           showMessage(false, err.response.data.error || "Đăng nhập thất bại")
@@ -287,16 +289,16 @@ function AuthPage({ }: Props) {
     axios.post(`${apiUrl}/auth/register`, formRegister, { withCredentials: true })
       .then(res => {
         showMessage(res.data.status, res.data.status ? "Đăng ký thành công" : "Đăng ký thất bại")
-          setMode("")
-                setTimeout(() => {
-                  setFormRegister({
-                    email: "",
-                    username: "",
-                    password: "",
-                    repassword: ""
-                  })
-                  handleCleanState()
-                }, 1000)
+        setMode("")
+        setTimeout(() => {
+          setFormRegister({
+            email: "",
+            username: "",
+            password: "",
+            repassword: ""
+          })
+          handleCleanState()
+        }, 1000)
       })
       .catch(err => {
         showMessage(false, err.response.data.error || "Đăng ký thất bại")
