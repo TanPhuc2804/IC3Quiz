@@ -14,7 +14,7 @@ const ModalExam = (props: Props) => {
             open={props.visible}
             onCancel={props.onCancel}
             footer={null}
-            width={900}
+            width={1000}
         >
            <ExamConfigurationForm onClose={props.onCancel} />
         </Modal>

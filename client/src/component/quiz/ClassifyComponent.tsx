@@ -19,7 +19,7 @@ function ClassifyComponent({ classify_question, handleChange, answers,faulties,m
     }
 
     const getClassname = (answerId:string,id:number)=>{
-        if(mode ===ModeEnum.TEST) return ""
+        if(mode ===ModeEnum.TESTING) return ""
         return findValue(answerId,id)>=0?"faulty":"correct"
     }
 

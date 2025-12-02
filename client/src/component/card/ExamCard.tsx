@@ -7,23 +7,23 @@ import { motion } from "framer-motion"
 import { useNavigate } from 'react-router'
 type ExamCardProp = {
   exam: Exam,
-  index?:number
+  index?: number
 }
 
-function ExamCard({ exam,index=0 }: ExamCardProp) {
+function ExamCard({ exam, index = 0 }: ExamCardProp) {
   const navigate = useNavigate()
-  const handleClick = ()=>{
-    navigate(`/exams/${exam._id}`,{state:{exam:exam}})
-    window.scrollTo(0,0)
+  const handleClick = () => {
+    navigate(`/exams/${exam._id}`, { state: { exam: exam } })
+    window.scrollTo(0, 0)
   }
 
   return (
     <motion.div
-      className='h-[450px] flex flex-col items-baseline justify-center pt-[30px] pb-[20px] pl-[30px] pr-[20px] w-[300px] border-2 rounded-[10px] shadow-2xl border-primary-blue-bayoux'
+      className='flex flex-col items-baseline justify-center pt-[30px] pb-[20px] pl-[30px] pr-[20px] w-[300px] border-2 rounded-[10px] shadow-2xl border-primary-blue-bayoux'
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut",delay:index*0.1 }}
-      viewport={{ once: false, amount: 0.2 }} 
+      transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
+      viewport={{ once: false, amount: 0.2 }}
     >
       <motion.img
         className='h-[100px] w-[100px] mx-auto my-[10px]'
@@ -35,7 +35,7 @@ function ExamCard({ exam,index=0 }: ExamCardProp) {
         viewport={{ once: false }}
       />
       <div className='font-bold text-[20px] min-h-[60px]'>{exam.content}</div>
-      <div className='text-[15px] mt-[10px] min-h-[100px]'>{exam.description}</div>
+      <div className='text-[15px] my-[20px] '>{exam.description}</div>
       <div className="grid gap-2 w-[200px]">
         <div className="flex justify-between gap-3">
           <span><FontAwesomeIcon icon={faClock} /> Duration:</span>
@@ -52,7 +52,7 @@ function ExamCard({ exam,index=0 }: ExamCardProp) {
       </div>
       <motion.div
         className='mx-auto my-[10px]'
-        whileHover={{ scale: 1.1, rotate: 1 }} 
+        whileHover={{ scale: 1.1, rotate: 1 }}
         transition={{ type: "spring", stiffness: 300 }}
       >
         <ButtonDefauld

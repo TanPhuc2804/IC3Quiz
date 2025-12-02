@@ -13,6 +13,7 @@ function getItem(label:string, key:string, icon:any, children?:any) {
 
 
 export const items = [
+    getItem("Dashboard", "dashboard", <DashboardOutlined />),
     getItem("Người dùng", "user", <DashboardOutlined />),
     getItem("Bộ đề thi", "exam", <ProductOutlined />),
     getItem("Bộ câu hỏi", "question", <ProductOutlined />),

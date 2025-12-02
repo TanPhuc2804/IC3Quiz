@@ -11,7 +11,6 @@ import axios from 'axios';
 import { motion, AnimatePresence } from "framer-motion";
 import Loading from '../../../component/loading/Loading';
 import ModalNotification from '../../../component/modal/ModalNotification';
-
 type QuestionFilter = {
     id: number,
     question: number
@@ -50,7 +49,6 @@ function PracticePage() {
                 const apiUrl = import.meta.env.VITE_API_URL;
                 const questionRes = await axios.get(`${apiUrl}/questions/${params.id}`, { withCredentials: true });
                 const questionData = questionRes.data;
-                console.log(questionRes);
                 if (!questionData || questionData.length === 0) {
                     setQuestions([]);
                 } else {
@@ -74,6 +72,8 @@ function PracticePage() {
         };
         fetchData()
     }, [])
+
+    console.log(results)
 
     useEffect(() => {
         const questionFilter = questions
@@ -115,7 +115,6 @@ function PracticePage() {
         }
 
     }
-    console.log(results)
     if (loading)
         return (
             <motion.div
@@ -138,7 +137,7 @@ function PracticePage() {
                     {questions.length > 0 && (
                         <motion.div
                             key="exam-content"
-                            className="bg-gray-200 px-3 pt-8 pb-20"
+                            className="bg-gray-200 px-3 pt-8 pb-20 "
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
@@ -164,24 +163,26 @@ function PracticePage() {
                                         ease: [0.25, 0.8, 0.25, 1]
                                     }}
                                 >
-                                    {questions.map((question, index) => (
-                                        <div
-                                            key={question.id}
-                                            ref={(el) => {
-                                                const id = typeof question.id === "number" ? question.id : index;
-                                                questionRefs.current[id] = el;
-                                            }}
-                                        >
-                                            <QuestionComponent
-                                                key={index}
-                                                question={question}
-                                                setResults={setResults}
-                                                setCountQuestionResult={setCountQuestionResult}
-                                                mode={mode}
-                                            />
-                                            <hr className="border-t border-gray-300 opacity-50" />
-                                        </div>
-                                    ))}
+                                    {questions.map((question, index) => {
+                                        return (
+                                            <div
+                                                key={question.id}
+                                                ref={(el) => {
+                                                    const id = typeof question.id === "number" ? question.id : index;
+                                                    questionRefs.current[id] = el;
+                                                }}
+                                            >
+                                                <QuestionComponent
+                                                    key={index}
+                                                    question={question}
+                                                    setResults={setResults}
+                                                    setCountQuestionResult={setCountQuestionResult}
+                                                    mode={mode}
+                                                />
+                                                <hr className="border-t border-gray-300 opacity-50" />
+                                            </div>
+                                        )
+                                    })}
                                 </motion.div>
 
                                 {/* Cột navigation */}
@@ -197,6 +198,7 @@ function PracticePage() {
                                 >
                                     {exam && (
                                         <TestNavigation
+                                            mode={mode}
                                             exam={exam}
                                             results={results}
                                             duration={exam.duration}
@@ -212,8 +214,8 @@ function PracticePage() {
             </ItemQuestionContext.Provider>
             <ModalNotification
                 isModalOpen={responseErr ? true : false}
-                handleOk={() => { 
-                    if(responseErr?.statusCode === 401){
+                handleOk={() => {
+                    if (responseErr?.statusCode === 401) {
                         window.location.href = '/login';
                     } else {
                         window.location.href = '/';
@@ -222,11 +224,11 @@ function PracticePage() {
                 handleCancel={() => {
                     setResponseErr(null);
                     window.location.href = '/';
-                 }}
-                error={responseErr} 
+                }}
+                error={responseErr}
                 okText={responseErr?.statusCode === 401 ? "Đăng nhập" : "Quay lại trang chủ"}
                 cancelText="Hủy"
-                />
+            />
         </QuestionContext.Provider>
     );
 }

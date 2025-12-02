@@ -8,13 +8,12 @@ import { Button, Table } from 'antd';
 import ModalQuestion from '../../component/modal/ModalQuestion';
 import type { Question } from '../../types';
 import ModalFileQuestion from '../../component/modal/ModalFileQuestion';
+import { showMessage } from '../../component/notification/Message';
 
 const QuestionComponent = () => {
   const handleAction = (record: any, actionType: 'edit' | 'delete') => {
     if (actionType === 'edit') {
-      console.log('Edit action for record:', record);
     } else if (actionType === 'delete') {
-      console.log('Delete action for record:', record);
     }
   };
   const column = getQuestionColumns(handleAction);
@@ -29,7 +28,9 @@ const QuestionComponent = () => {
       .then(res => {
         dispatch(getAllQuestions(res.data))
       })
-      .catch(err => console.log(err))
+      .catch(err =>{
+        showMessage(false, err.response?.data?.message || "Đã có lỗi xảy ra khi tải câu hỏi");
+      })
   }, [])
 
   return (

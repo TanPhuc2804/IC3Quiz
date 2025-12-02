@@ -29,7 +29,7 @@ function CheckBoxComponent({ onChange, options, limit_choice, faulties,mode }: C
     }
 
     const style = (value: string) => {
-        if(!selected.includes(value) || mode === ModeEnum.TEST){
+        if(!selected.includes(value) || mode === ModeEnum.TESTING){
             return ""
         }
 

@@ -19,6 +19,7 @@ export interface Exam {
     _id?: string,
     id: number,
     content: string,
+    level: number,
     description: string,
     image_url: string,
     total_user: number,
@@ -30,8 +31,9 @@ export interface Exam {
 }
 
 export interface Question {
-    _id?:string,
+    _id?: string,
     id?: number,
+    level: number,
     content: string,
     question?: number,
     question_type: QuestionType
@@ -41,8 +43,26 @@ export interface Question {
     option?: string[],
     classify_question?: ClassificationQuestion[],
     multiple_question?: Mutiple_Question[],
-    match_question?: MatchQuestion[]
+    match_question?: MatchQuestion[],
+    fill_blank_question?: FillBlankQuestion
 }
+
+
+export type FillBlankOption = {
+    id: number;
+    content: string;
+};
+
+export type BlankItem = {
+    id: number;
+    correctOptionId: number;
+    trailingText: string;
+};
+export type FillBlankQuestion = {
+    leadingText: string;
+    options: FillBlankOption[];
+    blanks: BlankItem[];
+};
 
 export interface MatchQuestion {
     id: number,
@@ -68,6 +88,7 @@ export interface Exam_Result {
     exam: Exam,
     submit_time: number,
     score: number,
+    mode: string,
     accurary_percentage: number, // phan tram dung
     error_percentage: number,// phan tram sai
     total_content: number,
@@ -79,7 +100,7 @@ export interface Exam_Result {
 export interface Category {
     id: number,
     content: string,
-    image_url: string
+    image_url?: string
 }
 
 export type ResultsType = {
@@ -93,7 +114,8 @@ export type ResultQuestionType = {
     id_classify?: number
     isCorrect: boolean,
     choice: any,
-    anwser_correct?: any
+    anwser_correct?: any,
+    id_fill_blank?: number
 }
 
 export type QuestionTableType = {
@@ -126,3 +148,6 @@ export interface ErrorResponse {
     error: string,
     statusCode?: number
 }
+
+
+// 

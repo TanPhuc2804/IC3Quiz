@@ -1,5 +1,5 @@
-import  { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router'
+import { useEffect, useState } from 'react'
+import {useNavigate } from 'react-router'
 import { useParams } from "react-router-dom";
 import type { Exam_Result, Exam as ExamType } from '../../../types'
 import ButtonDefauld from '../../../component/button/ButtonDefauld'
@@ -11,11 +11,25 @@ function ExamDetail() {
     const [exam, setExam] = useState<ExamType>()
     const params = useParams()
     const navigate = useNavigate()
-    const location = useLocation()
-
     const [result, setResult] = useState<Exam_Result[]>([])
-
+    const [attempts, setAttempts] = useState<any>({})
     useEffect(() => {
+        if (!exam) {
+            const apiUrl = import.meta.env.VITE_API_URL
+            const fetchExam = async () => {
+                const response = await axios.get(`${apiUrl}/exams/${params.id}`, { withCredentials: true })
+                const exams = response.data.exams
+                const attempts = response.data.attempts
+                setExam(exams)
+                setAttempts(attempts)
+
+            }
+            fetchExam()
+        }
+        setExam(exam)
+    }, [])
+    useEffect(() => {
+        if (!exam?._id) return
         const apiUrl = import.meta.env.VITE_API_URL
         axios.get(`${apiUrl}/users/result-detail/${exam?._id}`, { withCredentials: true })
             .then(res => res.data)
@@ -23,25 +37,9 @@ function ExamDetail() {
                 setResult(data)
             })
     }, [exam?._id])
-    useEffect(() => {
-        const { exam } = location.state
-        if (!exam) {
-
-            console.log(params)
-            const apiUrl = import.meta.env.VITE_API_URL
-            const fetchExam = async () => {
-                const response = await axios.get(`${apiUrl}/exams/${params.id}`)
-                setExam(response.data)
-            }
-            fetchExam()
-        }
-        setExam(exam)
-    }, [])
-
     const handlePracticeExam = (mode: string) => {
         navigate(`practice`, { state: { exam, mode: mode } })
     }
-
     return (
         <div className="mx-24 my-14">
             {/* Tiêu đề */}
@@ -75,26 +73,40 @@ function ExamDetail() {
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                    <ButtonDefauld
-                        height="50px"
-                        text="Training Mode"
-                        text_size={20}
-                        width="200px"
-                        text_color="white"
-                        border_color="white"
-                        haveMotion={true}
-                        onClick={() => { handlePracticeExam("training") }}
-                    />
-                    <ButtonDefauld
-                        height="50px"
-                        text="Test Mode"
-                        text_size={20}
-                        width="200px"
-                        text_color="white"
-                        border_color="white"
-                        haveMotion={true}
-                        onClick={() => { handlePracticeExam("test") }}
-                    />
+
+                    {
+                        (attempts.attempts_test<= 0 && attempts.attempts_training <= 0) ?
+                            <h4 className='text-[20px] font-bold text-red-600'>Bạn đã hết lượt làm</h4> : <></>
+                    }
+
+                    {
+                        attempts.attempts_training > 0 ?
+                            <ButtonDefauld
+                                height="50px"
+                                text={`Luyện tập: ${attempts.attempts_training || 0} lần`}
+                                text_size={20}
+                                width="200px"
+                                text_color="white"
+                                border_color="white"
+                                haveMotion={true}
+                                onClick={() => { handlePracticeExam("training") }}
+                            /> : <></>
+                    }
+
+                    {
+                        attempts.attempts_test > 0 ?
+                            <ButtonDefauld
+                                height="50px"
+                                text={`Thi thử: ${attempts.attempts_test|| 0} lần`}
+                                text_size={20}
+                                width="200px"
+                                text_color="white"
+                                border_color="white"
+                                haveMotion={true}
+                                onClick={() => { handlePracticeExam("testing") }}
+                            /> : <></>
+                    }
+
                 </motion.div>
 
                 {/* Thẻ chi tiết bài kiểm tra */}
@@ -108,10 +120,18 @@ function ExamDetail() {
                 </motion.div>
                 {
                     result.length > 0 &&
-                    <div className='mt-[60px] w-[800px] text-[20px] shadow-2xl border-2 rounded-[10px] border-gray-100 p-[20px] '>
+                    <div className='mt-[60px] text-[20px] shadow-2xl border-2 rounded-[10px] border-gray-100 p-[20px] '>
                         <h3 className='font-bold text-[25px] mb-[20px]'>Danh sách kết quả</h3>
-
-                        <ResultExamCard resultsData={result} />
+                        <div className='grid grid-cols-2 gap-5'>
+                            <div>
+                                <h4 className='font-bold text-[20px] mb-[10px]'>Kết quả của training</h4>
+                                <ResultExamCard resultsData={result.filter(r => r.mode === "training")} />
+                            </div>
+                            <div>
+                                <h4 className='font-bold text-[20px] mb-[10px]'>Kết quả của testing</h4>
+                                <ResultExamCard resultsData={result.filter(r => r.mode === "testing")} />
+                            </div>
+                        </div>
                     </div>
                 }
 

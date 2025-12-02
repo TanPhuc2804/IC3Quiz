@@ -2,12 +2,13 @@ import { memo, useState } from 'react'
 import { DragDropContext, Droppable, Draggable, type DropResult } from 'react-beautiful-dnd';
 import type { MatchQuestion, ResultQuestionType } from '../../types';
 import Definitions from '../card/Definitions';
+import { motion } from 'framer-motion';
 
 type MatchQuestinComponentProps = {
     match_question: MatchQuestion[],
     handleScoreMatch: (idTerm: number, idDefinition: number, isCount: boolean, idUpdate: boolean, isRemove: boolean, isChangeEmpty: boolean) => void,
     reductCount: () => void,
-    faulties:ResultQuestionType[],
+    faulties: ResultQuestionType[],
 }
 type Match = {
     indexSource: number,
@@ -30,8 +31,9 @@ function shuffleArray<T>(array: T[]): T[] {
     return arr;
 }
 
-function MatchQuestinComponent({ match_question, handleScoreMatch, reductCount,faulties }: MatchQuestinComponentProps) {
+function MatchQuestinComponent({ match_question, handleScoreMatch, reductCount, faulties }: MatchQuestinComponentProps) {
     const [isDragging, setIsDragging] = useState(false);
+
     const [definitions, setDefinitions] = useState(
         shuffleArray(
             match_question.map((item, index) => ({
@@ -43,13 +45,19 @@ function MatchQuestinComponent({ match_question, handleScoreMatch, reductCount,f
     );
     const [matchs, setMatchs] = useState<Match[]>(Array.from({ length: definitions.length }, () => ({ ...defaultMatch })))
 
+    const getMarrin = () => {
+        if (isDragging)
+            return "mb-50"
+        if (match_question.length == 4)
+            return "mb-25"
+        if (match_question.length == 5)
+            return "mb-50"
+        return 'm-3.5'
+    }
 
-    
-    // console.log(faulties) 
-    // console.log(matchs)
 
-    const findValue = (idTerm:number)=>{
-        return faulties.findIndex(item=>(item.choice ===idTerm && !item.isCorrect))
+    const findValue = (idTerm: number) => {
+        return faulties.findIndex(item => (item.choice === idTerm && !item.isCorrect))
     }
 
     const handleDragStart = () => setIsDragging(true);
@@ -70,8 +78,6 @@ function MatchQuestinComponent({ match_question, handleScoreMatch, reductCount,f
         if (droppableIdDestination === droppableIdSource && droppableIdDestination === "drop") {
             const indexDestination = destination.index
             const indexSource = source.index
-
-            // console.log(matchs)
             // check definition
             if (matchs[indexDestination].definition !== "" && matchs[indexSource].definition !== "") {
                 handleScoreMatch(match_question[indexDestination].id, +matchs[indexSource].id, false, true, false, false)
@@ -157,13 +163,15 @@ function MatchQuestinComponent({ match_question, handleScoreMatch, reductCount,f
         }
 
     }
-
     return (
         <DragDropContext
             onDragEnd={handleDragEnd}
             onDragStart={handleDragStart}
         >
-            <div className='grid grid-cols-2 w-[800px] h-[400px]'>
+            <motion.div
+                className={`grid grid-cols-2 w-[800px] h-[400px] ${getMarrin()} `}
+                layout
+            >
                 <div>
                     <p className=' p-3 text-center font-bold bg-gray-200 rounded--2xl'>Thuật ngữ ( Kéo thả)</p>
                     <Droppable
@@ -188,7 +196,7 @@ function MatchQuestinComponent({ match_question, handleScoreMatch, reductCount,f
                     </Droppable>
                 </div>
 
-                <div>
+                <div className=''>
                     <p className=' p-3 text-center font-bold bg-gray-200 rounded-r-2xl'>Định nghĩa</p>
                     <Droppable droppableId='drop' key={"drop"}>
                         {
@@ -219,7 +227,7 @@ function MatchQuestinComponent({ match_question, handleScoreMatch, reductCount,f
                                                             >
                                                                 {
                                                                     matchs[index].definition !== ""
-                                                                        ? <div className={(findValue(matchs[index].id) > -1)?  'p-2.5 text-red-500' :'p-2.5'}>
+                                                                        ? <div className={(findValue(matchs[index].id) > -1) ? 'p-2.5 text-red-500' : 'p-2.5'}>
                                                                             {matchs[index].definition}
                                                                         </div>
                                                                         : <span>Kéo định nghĩa vào đây</span>
@@ -242,7 +250,7 @@ function MatchQuestinComponent({ match_question, handleScoreMatch, reductCount,f
                     </Droppable>
 
                 </div>
-            </div>
+            </motion.div>
         </DragDropContext>
     )
 }

@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router'
 import type { Exam, Exam_Result, ResultsType } from '../../../../types'
 import { QuestionType } from '../../../../types/enums'
 import axios from 'axios'
+import { showMessage } from '../../../notification/Message'
 
 type QuestionFilter = {
     id: number,
@@ -17,7 +18,8 @@ type TestNavigationProp = {
     onClick?: (index: number) => void,
     duration: number,
     results: ResultsType[],
-    exam: Exam
+    exam: Exam,
+    mode: string
 }
 const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -27,11 +29,10 @@ const formatTime = (seconds: number) => {
 
 const changeMinutesToSeconds = (minutes: number) => minutes * 60
 
-function calculateResult(details: ResultsType[], exam: Exam, submit_time: number): Exam_Result {
+function calculateResult(details: ResultsType[], exam: Exam, submit_time: number, mode: string): Exam_Result {
 
     let score = 0;
     const total_content = details.length;
-    console.log("calculateResult - details:", details, total_content)
     details.forEach((q) => {
         if (q.question_type === QuestionType.NORMAL) {
             ``
@@ -59,6 +60,7 @@ function calculateResult(details: ResultsType[], exam: Exam, submit_time: number
         accurary_percentage: isNaN(accuracy_percentage) ? 0 : accuracy_percentage,
         error_percentage: isNaN(error_percentage) ? 0 : error_percentage,
         total_content,
+        mode: mode,
         user_id: 1,
         exam: exam,
         result_detail: details,
@@ -67,7 +69,7 @@ function calculateResult(details: ResultsType[], exam: Exam, submit_time: number
 }
 
 
-function TestNavigation({ questionsProp, isDone, duration, results, exam }: TestNavigationProp) {
+function TestNavigation({ questionsProp, isDone, duration, results, exam, mode }: TestNavigationProp) {
     const [timer, setTimer] = useState(0)
     const maxDuration = changeMinutesToSeconds(duration)
     const navigate = useNavigate()
@@ -75,31 +77,28 @@ function TestNavigation({ questionsProp, isDone, duration, results, exam }: Test
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setTimer(pre => {
-                const newSenconds = pre + 1
-                //newSenconds === maxDuration
-                if (newSenconds === maxDuration) {
-                    alert("Het thời gian")
-                    //handleSubmit()
-                }
-                return newSenconds
-            })
+            setTimer(pre => pre + 1)
         }, 1000)
         timer
         return () => clearInterval(timer)
     }, [])
 
-    const handleSubmit = () => {
-        const resultExam = calculateResult(results, exam, timer)
+    useEffect(() => {
+        if (timer === maxDuration) {
+            alert("Het thời gian")
+            handleSubmit()
+        }
+    }, [timer])
 
+    const handleSubmit = () => {
+        const resultExam = calculateResult(results, exam, timer, mode)
         const apiUrl = import.meta.env.VITE_API_URL
         axios.post(`${apiUrl}/users/save-result`, { ...resultExam, exam: resultExam.exam._id }, { withCredentials: true })
-            .then(response => {
-                console.log(response.data)
+            .then(_ => {
                 navigate(`/exams/${id}/result`, { state: { results: resultExam } })
             })
             .catch(error => {
-                console.log(error)
+                showMessage(false, error.response?.data?.message || "Đã có lỗi xảy ra khi lưu kết quả")
             });
 
     }

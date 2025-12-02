@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Upload, message, Button, Space, Card, Alert, List, Typography, Table, Drawer, Modal } from 'antd'; // Thêm Modal
+import { Upload, message, Button, Space, Card, Alert, List, Typography, Table, Drawer, Modal } from 'antd'; 
 import { FileExcelOutlined, FileTextOutlined, EyeOutlined, DownloadOutlined } from '@ant-design/icons';
 import type { UploadProps } from 'antd';
 import type { UploadFile, RcFile } from 'antd/es/upload/interface';
@@ -114,7 +114,6 @@ const ModalFileQuestion = (props: Props) => {
 
   const handleCreateQuestion = () => {
     const questions: Question[] = [];
-    console.log(sheetData)
     sheetData.forEach(sheet => {
       sheet.data.forEach((row, index) => {
         if (index === 0) return;
@@ -143,21 +142,22 @@ const ModalFileQuestion = (props: Props) => {
     const question: Question = {
       question_type: questionType,
       content: row["Column1"] || '',
+      level: row["Column2"] || ''
     };
 
     if (questionType === QuestionType.NORMAL) {
       const correctAnswer = row[`Column${length}`];
       const options = []
-      for (let i = 2; i < length; i++) {
+      for (let i = 3; i < length; i++) {
         options.push(row[`Column${i}`])
       }
       question.correct_answer = correctAnswer;
       question.option = options;
     }
     if (questionType === QuestionType.MULTIPLE) {
-      const limitChoice = row[`Column2`];
+      const limitChoice = row[`Column3`];
       question.multiple_question = [];
-      for (let i = 3; i <= length; i += 2) {
+      for (let i = 4; i <= length; i += 2) {
         const optionText = row[`Column${i}`];
         const isCorrect = row[`Column${i + 1}`] === 'true' || row[`Column${i + 1}`] === true;
         question.multiple_question.push({ option_text: optionText, is_correct: isCorrect })
@@ -166,7 +166,7 @@ const ModalFileQuestion = (props: Props) => {
     }
     if (questionType === QuestionType.DROP_MATCH) {
       question.match_question = [];
-      for (let i = 2; i <= length; i += 2) {
+      for (let i = 3; i <= length; i += 2) {
         const term = row[`Column${i}`];
         const definition = row[`Column${i + 1}`];
         question.match_question.push({ id: i, term, definition })
@@ -174,7 +174,7 @@ const ModalFileQuestion = (props: Props) => {
     }
     if (questionType === QuestionType.CLASSIFY) {
       question.classify_question = [];
-      for (let i = 2; i <= length; i += 2) {
+      for (let i = 3; i <= length; i += 2) {
         const content = row[`Column${i}`];
         const classify = row[`Column${i + 1}`];
         question.classify_question.push({ id: i, content, classify });

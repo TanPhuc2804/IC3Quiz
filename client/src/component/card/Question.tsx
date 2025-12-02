@@ -10,6 +10,7 @@ import ClassifyComponent from '../quiz/ClassifyComponent'
 import MatchQuestinComponent from '../quiz/MatchQuestinComponent'
 import { useItemQuestionContext } from '../../contexts/ItemQuestionContext'
 import { motion, AnimatePresence } from "framer-motion";
+import FillBlankQuestionComponent from '../quiz/FillBlankQuestionComponent'
 
 type CountQuestionType = {
     id: number,
@@ -35,7 +36,6 @@ function QuestionComponent({ question, setResults, setCountQuestionResult, mode 
     const [valueNormal, setValueNormal] = useState("");
     const [option, setOptions] = useState<any>([])
     const [_valueMultiple, setValueMultiple] = useState<any[]>([])
-
     const [answersClassify, setAnswersClassify] = useState<Record<string | number, string>>({});
     const [_countMatch, setCountMatch] = useState(0)
     const [resultNormal, setResultNormal] = useState<ResultQuestionType>(resultNormalInit)
@@ -157,6 +157,11 @@ function QuestionComponent({ question, setResults, setCountQuestionResult, mode 
                 return (
 
                     <MatchQuestinComponent match_question={question.match_question ?? []} handleScoreMatch={handleScoreMatch} reductCount={reductCount} faulties={faulties} />
+                )
+            }
+            case QuestionType.FILL_BLANK: {
+                return (
+                    <FillBlankQuestionComponent question={question} handleChange={handleChange} faulties={faulties} mode={mode} />
                 )
             }
             default: {
@@ -337,6 +342,39 @@ function QuestionComponent({ question, setResults, setCountQuestionResult, mode 
         }
     };
 
+    const handleChange = (blankId: number, value: number) => {
+        const blankQuestion = question.fill_blank_question;
+        if (!blankQuestion) return;
+        setResultQuestion(pre => {
+            const term = [...pre];
+            const blankItem = blankQuestion.blanks.find(blank => blank.id === blankId);
+            if (!blankItem) return term;
+            const isCorrect = blankItem.correctOptionId === value;
+            const indexContain = term.findIndex(item => item.id_fill_blank === blankId);
+            if (indexContain !== -1) {
+                term[indexContain] = {
+                    ...term[indexContain],
+                    isCorrect: isCorrect,
+                    choice: value,
+                    anwser_correct: blankItem.correctOptionId
+                };
+                return term;
+            } else {
+                return [
+                    ...term,
+                    {
+                        isCorrect: isCorrect,
+                        choice: value,
+                        id_fill_blank: blankId,
+                        anwser_correct: blankItem.correctOptionId
+                    }
+                ];
+            }
+
+        });
+        if(resultQuestion.length + 1 === blankQuestion.blanks.length)
+            setIsChoice(true)
+    };
 
     const getCorrectAnwser = (type: string) => {
         if (type === QuestionType.NORMAL) {
@@ -358,6 +396,18 @@ function QuestionComponent({ question, setResults, setCountQuestionResult, mode 
             })
             return correct
         }
+
+        if (type === QuestionType.FILL_BLANK) {
+            let correct = ""
+            question.fill_blank_question?.blanks.forEach(blank => {
+                const option = question.fill_blank_question?.options.find(opt => opt.id === blank.correctOptionId)
+                if (option) {
+                    correct += option.content + " "
+                }
+            })
+            return correct
+        }
+
         if (type === QuestionType.CLASSIFY) {
             let correct = ""
             const grounded = Object.values(
@@ -382,8 +432,6 @@ function QuestionComponent({ question, setResults, setCountQuestionResult, mode 
         }
         return "Test"
     }
-    // testData(question.question_type)
-    // console.log(getCorrectAnwser(question.question_type))
     return (
         <ConfigProvider
             theme={{
@@ -411,6 +459,7 @@ function QuestionComponent({ question, setResults, setCountQuestionResult, mode 
                     >
                         <p>{question?.content}</p>
                         {getComponentType(question.question_type)}
+                        {/* <FillBlankQuestionComponent question={question} handleChange={handleChange} faulties={faulties} mode={mode} /> */}
                     </motion.div>
                 </motion.div>
 

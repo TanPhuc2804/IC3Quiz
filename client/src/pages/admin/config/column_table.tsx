@@ -151,6 +151,7 @@ export const getQuestionColumns = (
         [QuestionTypeEnum.MULTIPLE]: { name: 'Nhiều lựa chọn', color: 'green' },
         [QuestionTypeEnum.DROP_MATCH]: { name: 'Kéo thả/Ghép đôi', color: 'volcano' },
         [QuestionTypeEnum.CLASSIFY]: { name: 'Phân loại', color: 'geekblue' },
+        [QuestionTypeEnum.FILL_BLANK]: { name: 'Điền vào chỗ trống', color: 'purple' },
     };
 
     return [
@@ -172,6 +173,25 @@ export const getQuestionColumns = (
             },
         },
         {
+            title: 'Level',
+            dataIndex: 'level',
+            key: 'level',
+            align: 'center',
+            className: 'w-[100px]',
+            filters: [
+                { text: 'Level 1', value: 1 },
+                { text: 'Level 2', value: 2 },
+                { text: 'Level 3', value: 3 },
+            ],
+            onFilter: (value, record) => record.level === value,
+            sorter: (a, b) => (a.level - b.level),
+            render: (level: number) => (
+                <Tag color="cyan" key={level} >
+                    <div className="text-center text-[14px]">{level.toString().toUpperCase()}</div>
+                </Tag>
+            ),
+        },
+        {
             title: 'Loại câu hỏi',
             dataIndex: 'question_type',
             key: 'question_type',
@@ -186,15 +206,14 @@ export const getQuestionColumns = (
 
             render: (type: QuestionTypeEnum) => {
                 const mapping = typeMapping[type];
-
                 if (mapping) {
                     return (
                         <Tag color={mapping.color}>
-                            {mapping.name}
+                            <div className="text-center text-[14px]">{mapping.name}</div>
                         </Tag>
                     );
                 }
-                return <Tag color="default">{type?.toUpperCase() ??""}</Tag>;
+                return <Tag color="default">{type?.toUpperCase() ?? ""}</Tag>;
             },
             width: 180,
             align: 'center',

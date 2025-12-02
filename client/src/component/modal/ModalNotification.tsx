@@ -11,7 +11,6 @@ type Props = {
     cancelText?: string
 }
 const ModalNotification = (props: Props) => {
-    console.log("Error modal: ",props.error);
     return (
         <Modal
             title="Notification"

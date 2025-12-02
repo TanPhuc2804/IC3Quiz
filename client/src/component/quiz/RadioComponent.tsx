@@ -13,7 +13,7 @@ type RadioComponentProp = {
 function RadioComponent({ onChange, value, option, isFaulty,mode }: RadioComponentProp) {
     const getClassname = (valueOtp: string) => {
         
-        if (value !== valueOtp || mode ===ModeEnum.TEST) {
+        if (value !== valueOtp || mode ===ModeEnum.TESTING) {
             return "";
         }
         if (value === valueOtp && isFaulty) {

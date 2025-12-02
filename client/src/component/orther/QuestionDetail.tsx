@@ -230,7 +230,7 @@ const QuestionDetail: React.FC<{ question: Question }> = ({ question }) => {
         exam =>
             question.exam_id &&
             Array.isArray(question.exam_id) &&
-            !question.exam_id.some(assigned => assigned._id === exam._id)
+            !question.exam_id.some(assigned => assigned._id === exam._id) || !question.exam_id
     );
 
     const handleAddExams = () => {
@@ -255,7 +255,6 @@ const QuestionDetail: React.FC<{ question: Question }> = ({ question }) => {
     // Xử lý sự kiện xóa bộ đề (từ danh sách Tag)
     const handleRemoveExam = (examIdToRemove: string) => {
         const newExamList = (question.exam_id ?? []).filter(exam => exam._id !== examIdToRemove);
-        console.log("New Exam List after removal:", examIdToRemove);
         onUpdateExams(newExamList);
         const importUrl = import.meta.env.VITE_API_URL
         axios.post(`${importUrl}/questions/removeExam`, {

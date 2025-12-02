@@ -2,6 +2,7 @@
 import Home from "../pages/Home"
 import PaymentResult from "../pages/PaymentResult"
 import AdminPage from "../pages/admin"
+import Dashboard from "../pages/admin/Dashboard"
 import Exam from "../pages/admin/Exam"
 import QuestionPage from "../pages/admin/Question"
 import User from "../pages/admin/User"
@@ -34,6 +35,7 @@ export const privateRoutes = [
             { path: "exam", page: Exam },
             { path: "question", page: QuestionPage },
             { path: "account", page: QuestionPage },
+            { path: "dashboard", page: Dashboard },
         ]
     }
 ]

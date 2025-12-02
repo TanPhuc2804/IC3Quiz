@@ -39,7 +39,6 @@ function ExamResult() {
         // fetch data 
         if (location.state) {
             const { results } = location.state
-            console.log(location.state)
             setExamResult(results)
             setQuestionsResult(results.result_detail)
             return

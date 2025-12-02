@@ -12,7 +12,6 @@ type ExamResultCardType = {
 }
 
 function ExamResultCard({ accurary_percentage, submit_time, total_content, total_correct }: ExamResultCardType) {
-    console.log({ accurary_percentage, submit_time, total_content, total_correct })
     return (
         <motion.div
             className="flex flex-col justify-around h-[250px] bg-[#f8f9fa] border border-[#efefef] shadow-[0_2px_8px_0_rgba(0,0,0,0.05)] mt-[20px] py-[24px] px-[16px]"

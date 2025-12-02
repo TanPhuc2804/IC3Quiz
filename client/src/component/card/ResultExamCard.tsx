@@ -91,6 +91,7 @@ const ResultExamCard = (props: Props) => {
 
     return (
         <Table
+            className=' hover:cursor-pointer'
             columns={columns}
             dataSource={props.resultsData}
             rowKey={(record: Exam_Result) => record._id ?? ""}

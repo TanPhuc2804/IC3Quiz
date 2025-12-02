@@ -4,7 +4,7 @@ import { Table, Tag, type TableProps } from 'antd';
 import { QuestionType as TypeEnum } from '../../types/enums';
 import { motion } from "framer-motion";
 
-type QuestionType = "normal" | "classify" | "multiple" | "drop_match";
+type QuestionType = "normal" | "classify" | "multiple" | "drop_match" |"fill_blank";
 
 type TableSatisticsResultType = {
     questions: ResultsType[]
@@ -18,8 +18,10 @@ function TableSatisticsResult({ questions }: TableSatisticsResultType) {
             normal: [],
             multiple: [],
             classify: [],
-            drop_match: []
-        }
+            drop_match: [],
+            fill_blank: []
+        }   
+        console.log(data)
 
         data?.forEach(value => {
             grouded[value.question_type as QuestionType].push(value)
@@ -73,6 +75,7 @@ function TableSatisticsResult({ questions }: TableSatisticsResultType) {
         if (type === TypeEnum.MULTIPLE) return "Chọn nhiều đáp án"
         if (type === TypeEnum.CLASSIFY) return "Phân loại"
         if (type === TypeEnum.DROP_MATCH) return "Kéo thả đáp án"
+        if (type === TypeEnum.FILL_BLANK) return "Điền vào chỗ trống"
 
     }
 

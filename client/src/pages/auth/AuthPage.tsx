@@ -228,7 +228,6 @@ function AuthPage({ }: Props) {
     if (name === "repassword") {
       let messsageError = ""
       if (value !== formRegister.password) {
-        console.log("SS")
         messsageError = "Vui lòng nhập đúng với mật khẩu !"
       }
       if (messsageError.length > 0) {

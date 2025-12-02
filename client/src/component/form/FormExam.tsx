@@ -1,5 +1,5 @@
-import React,  { useEffect } from 'react';
-import { Form, Input, InputNumber, Button, Card, Divider, Select, Space, Typography, Tag, message, Row, Col, Statistic } from 'antd';
+import React, { useEffect } from 'react';
+import { Form, Input, InputNumber, Button, Card, Divider, Select, Space, Typography, Tag, message, Row, Col, Statistic, Radio } from 'antd';
 import { MinusCircleOutlined, PlusOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useAppDispatch } from '../../hooks/redux';
@@ -22,7 +22,7 @@ interface RequiredQuestion {
 }
 
 interface ExamFormData {
-    "total_ question": number;
+    "total_question": number;
     require_questions: RequiredQuestion[];
     description: string;
     content: string;
@@ -75,7 +75,7 @@ const ExamConfigurationForm: React.FC<Props> = (props) => {
     const allTypesUsed = usedQuestionTypes.size >= Object.keys(QuestionTypeOptions).length;
 
     const onFinish = (values: ExamFormData) => {
-        const totalConfig = values["total_ question"];
+        const totalConfig = values["total_question"];
 
         if (requiredCount !== totalConfig) {
             message.error(`Lỗi: Tổng số câu hỏi yêu cầu (${requiredCount}) phải bằng Tổng số câu hỏi (${totalConfig}).`);
@@ -87,16 +87,18 @@ const ExamConfigurationForm: React.FC<Props> = (props) => {
             .then(response => {
                 message.success(`Đã lưu cấu hình "${values.content}" thành công!`);
                 dispatch(insertExam(response.data.exam));
+                form.resetFields();
                 props.onClose && props.onClose();
+                
             })
             .catch(error => {
                 console.error('Error saving exam configuration:', error);
-                message.error(error.response?.data?.message || 'Có lỗi xảy ra khi lưu cấu hình bộ đề.');
+                message.error(error.response?.data?.error || 'Có lỗi xảy ra khi lưu cấu hình bộ đề.');
             });
     };
 
     return (
-        <div className="p-4 overflow-y-auto max-h-[70vh]">
+        <div className="p-4 max-h-[70vh] overflow-x-auto">
             <Form
                 form={form}
                 layout="vertical"
@@ -105,7 +107,6 @@ const ExamConfigurationForm: React.FC<Props> = (props) => {
                     updateRequiredCount(allValues.require_questions);
                 }}
                 scrollToFirstError
-                style={{}}
             >
                 <Divider orientation="left">Thông tin chung</Divider>
 
@@ -133,13 +134,32 @@ const ExamConfigurationForm: React.FC<Props> = (props) => {
 
                 </Row>
 
-                <Form.Item
-                    style={{ width: 400 }}
-                    name="description"
-                    label="Mô Tả"
-                >
-                    <TextArea rows={3} placeholder="Mô tả chi tiết về nội dung và mục đích của bộ đề." />
-                </Form.Item>
+                <Row gutter={24}>
+                    <Col span={12}>
+                        <Form.Item
+                            style={{ width: 400 }}
+                            name="description"
+                            label="Mô Tả"
+                        >
+                            <TextArea rows={3} placeholder="Mô tả chi tiết về nội dung và mục đích của bộ đề." />
+                        </Form.Item>
+                    </Col >
+                    <Col span={12}>
+                        <Form.Item
+                            style={{ width: 400 }}
+                            name="level"
+                            label="Level Bộ Đề"
+                            required
+                        >
+                            <Radio.Group defaultValue="1">
+                                <Radio value={1}>Level 1</Radio>
+                                <Radio value={2}>Level 2</Radio>
+                                <Radio value={3}>Level 3</Radio>
+                            </Radio.Group>
+                        </Form.Item>
+                    </Col>
+                </Row>
+
 
                 <Row gutter={24}>
                     <Col span={8}>
@@ -153,7 +173,7 @@ const ExamConfigurationForm: React.FC<Props> = (props) => {
                     </Col>
                     <Col span={8}>
                         <Form.Item
-                            name="total_ question"
+                            name="total_question"
                             label="Tổng Số Câu Hỏi"
                             rules={[{ required: true, message: 'Vui lòng nhập tổng số câu!' }]}
                         >
@@ -165,8 +185,8 @@ const ExamConfigurationForm: React.FC<Props> = (props) => {
                             <Statistic
                                 title="Tổng Số Câu Hỏi Yêu Cầu (Tối thiểu)"
                                 value={requiredCount}
-                                suffix={`/ ${form.getFieldValue('total_ question') || 0}`}
-                                valueStyle={{ color: requiredCount > form.getFieldValue('total_ question') ? '#cf1322' : '#3f8600' }}
+                                suffix={`/ ${form.getFieldValue('total_question') || 0}`}
+                                valueStyle={{ color: requiredCount > form.getFieldValue('total_question') ? '#cf1322' : '#3f8600' }}
                             />
                             <Text type="secondary" className="text-xs">
                                 Tổng yêu cầu phải bằng Tổng số câu hỏi (Theo Config) để đảm bảo tính nhất quán.

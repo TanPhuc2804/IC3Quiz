@@ -16,7 +16,7 @@ type Props = {
 const PackageCard = (props: Props) => {
 
     const handleBuy = () => {
-        if(props.user_bought === props.package._id){
+        if (props.user_bought === props.package._id) {
             return;
         }
         const apiUrl = import.meta.env.VITE_API_URL;
@@ -35,15 +35,6 @@ const PackageCard = (props: Props) => {
                 console.error("Error creating payment url: ", err);
             });
     }
-
-
-    const disableButton = (package_id: string) => {
-        if (package_id === "") {
-            return false;
-        }
-        return props.user_bought !== props.package._id
-    }
-
     return (
         <div className='px-4 py-2 border-1 m-2 rounded-2xl border-neutral-300'>
             <h3 className='text-lg font-semibold py-2'>{props.package.name}</h3>
@@ -60,7 +51,12 @@ const PackageCard = (props: Props) => {
                     ))
                 }
             </div>
-            <Button className='mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors' onClick={handleBuy} disabled={disableButton(props.user_bought)}>{props.duration === "" ? "Chọn gói" : props.duration}</Button>
+            {
+                props.user_bought ?
+                    (props.user_bought === props.package._id ? <div className='mt-4 w-full text-center font-bold text-red-500 py-2 text-[16px]'> Bạn đã mua gói này </div> : <></>)
+                    :
+                    (<Button className='mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors' onClick={handleBuy}>Chọn Gói</Button>)
+            }
         </div>
     )
 }

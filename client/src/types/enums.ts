@@ -2,12 +2,13 @@ export const QuestionType ={
     NORMAL:"normal",
     MULTIPLE:"multiple",
     DROP_MATCH:"drop_match",
-    CLASSIFY:"classify"
+    CLASSIFY:"classify",
+    FILL_BLANK:"fill_blank",
 }
 
 export const ModeEnum ={
     TRAINING:"training",
-    TEST:"test",
+    TESTING:"testing",
    
 }
 
