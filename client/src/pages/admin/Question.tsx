@@ -11,7 +11,7 @@ import ModalFileQuestion from '../../component/modal/ModalFileQuestion';
 import { showMessage } from '../../component/notification/Message';
 
 const QuestionComponent = () => {
-  const handleAction = (record: any, actionType: 'edit' | 'delete') => {
+  const handleAction = (_: any, actionType: 'edit' | 'delete') => {
     if (actionType === 'edit') {
     } else if (actionType === 'delete') {
     }

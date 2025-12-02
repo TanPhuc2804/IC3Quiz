@@ -2,7 +2,7 @@ import React from 'react';
 import { Select } from 'antd';
 import type { Question, ResultQuestionType } from '../../types';
 
-const FillBlankQuestionComponent: React.FC<{ question: Question, handleChange: (blankId: number, value: number) => void, faulties: ResultQuestionType[], mode: string }> = ({ question, handleChange, faulties, mode }) => {
+const FillBlankQuestionComponent: React.FC<{ question: Question, handleChange: (blankId: number, value: number) => void, faulties: ResultQuestionType[], mode: string }> = ({ question, handleChange}) => {
     const blankQuestion = question?.fill_blank_question;
     if (!blankQuestion) return null;
 

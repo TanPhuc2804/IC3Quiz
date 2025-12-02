@@ -1,5 +1,4 @@
 import type { Question } from "../types";
-import type { QuestionType } from "../types/enums";
 
 export const fillBlankQuestionData: Question[] = [
     {
